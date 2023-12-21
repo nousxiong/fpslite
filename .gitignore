@@ -1,6 +1,6 @@
 # This .gitignore file should be placed at the root of your Unity project directory
 #
-# Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
+# Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
 /[Ll]ibrary/
 /[Tt]emp/
@@ -14,8 +14,8 @@
 # They also could contain extremely sensitive data
 /[Mm]emoryCaptures/
 
-# Recordings can get excessive in size
-/[Rr]ecordings/
+# Asset meta data should only be ignored when the corresponding asset is also ignored
+!/[Aa]ssets/**/*.meta
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # /[Aa]ssets/AssetStoreTools*
@@ -46,7 +46,6 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
-.idea/
 
 # Unity3D generated meta files
 *.pidb.meta
@@ -59,8 +58,9 @@ sysinfo.txt
 # Builds
 *.apk
 *.aab
-*.unitypackage
 *.app
+# *.unitypackage
+*.unitypackage.meta
 
 # Crashlytics generated file
 crashlytics-build.properties
@@ -71,3 +71,41 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# IDE file
+.idea/
+/Recordings/
+.vscode/
+.vsconfig
+
+# 构建临时文件
+*/Android/**/build
+*/Android/**/Il2CppOutputProject
+*/Android/**/unityLibrary/symbols
+*/Android/**/release
+
+# YooAssets Assets
+/Bundles/**
+Assets/StreamingAssets/yoo.meta
+Assets/StreamingAssets/yoo/**
+
+# Mac系统文件
+.DS_Store
+
+# 其他文件
+*.log
+mono_crash.**.json
+.utmp
+**_DoNotShip
+StreamingAssets*
+StateMachineEditorData/*.dat
+FR2_Cache.asset*
+/Assets/PlayMaker/Editor/Resources/EditorStartupPrefs.asset
+/Assets/PlayMaker/Editor/Resources/EditorStartupPrefs.asset.meta
+/Assets/PlayMaker/.git/
+/Assets/SceneDependencyCache/**
+/Assets/SceneDependencyCache*
+
+# 微软office/Wps相关 tmp files
+~$*
+/~$

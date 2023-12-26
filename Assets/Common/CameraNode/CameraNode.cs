@@ -1,17 +1,21 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Common.CameraNode
 {
     public class CameraNode : MonoBehaviour
     {
+        public CameraPath Path;
         public Color gizmoColor = Color.grey;
-
-        private void OnDrawGizmos()
+#if UNITY_EDITOR
+        public static CameraNode SelectedCameraNode;
+#endif
+        void OnDrawGizmos()
         {
             DrawBox();
         }
 
-        private void DrawBox()
+        void DrawBox()
         {
             if (!gameObject.activeInHierarchy)
             {

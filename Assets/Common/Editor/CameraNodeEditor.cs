@@ -6,33 +6,45 @@ namespace Common.Editor
     [CustomEditor(typeof(CameraNode.CameraNode))]
     public class CameraNodeEditor : UnityEditor.Editor
     {
-        private CameraNode.CameraNode startNode;
+        static CameraNode.CameraNode startNode;
 
-        private void OnSceneGUI()
+        void OnSceneGUI()
         {
             Event e = Event.current;
             var cameraNode = (CameraNode.CameraNode)target;
-            Debug.Log($"CameraNode {cameraNode.transform.position} {e.type} OnSceneGUI");
-            // if (e.type == EventType.MouseMove)
+            Debug.Log($"{cameraNode.transform.position} {e.type} OnSceneGUI");
+
+            if (e.type == EventType.MouseDown)
             {
-                if (startNode == null)
+                Ray ray = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition);
+                if (Physics.Raycast(ray, out RaycastHit hit))
                 {
-                    startNode = cameraNode;
+                    var hitNode = hit.collider.GetComponent<CameraNode.CameraNode>();
+                    if (hitNode != null)
+                    {
+                        if (hitNode == cameraNode)
+                        {
+                            startNode = startNode == cameraNode ? null : cameraNode;
+                        }
+                    }
+                    else
+                    {
+                        startNode = null;
+                    }
                 }
-                
-                if (startNode == cameraNode)
+                else
                 {
-                    Ray ray = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition);
-                    // Debug.Log($"mouse ray {ray.origin}");
-                    Handles.color = Color.yellow;
-                    Handles.DrawLine(startNode.transform.position, ray.origin);
-                    // HandleUtility.Repaint();
-                }
-                else if (startNode != null)
-                {
-                    Handles.DrawLine(startNode.transform.position, cameraNode.transform.position);
+                    startNode = null;
                 }
             }
+
+            if (startNode == cameraNode)
+            {
+                Ray ray = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition);
+                Handles.color = Color.yellow;
+                Handles.DrawLine(cameraNode.transform.position, ray.origin);
+            }
+            
             HandleUtility.Repaint();
         }
     }

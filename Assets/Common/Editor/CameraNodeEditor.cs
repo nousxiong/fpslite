@@ -30,6 +30,7 @@ namespace Common.Editor
                         {
                             // TODO 创建CameraPath
                             Debug.Log($"add new {hitNode.transform.position}");
+                            startNode.Connect(hitNode, out _);
                             startNode = null;
                         }
                     }

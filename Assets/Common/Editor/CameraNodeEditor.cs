@@ -11,8 +11,8 @@ namespace Common.Editor
         void OnSceneGUI()
         {
             Event e = Event.current;
-            var cameraNode = (CameraNode.CameraNode)target;
-            Debug.Log($"{cameraNode.transform.position} {e.type} OnSceneGUI");
+            var currentNode = (CameraNode.CameraNode)target;
+            Debug.Log($"{currentNode.transform.position} {e.type} OnSceneGUI");
 
             if (e.type == EventType.MouseDown)
             {
@@ -22,9 +22,15 @@ namespace Common.Editor
                     var hitNode = hit.collider.GetComponent<CameraNode.CameraNode>();
                     if (hitNode != null)
                     {
-                        if (hitNode == cameraNode)
+                        if (hitNode == currentNode)
                         {
-                            startNode = startNode == cameraNode ? null : cameraNode;
+                            startNode = startNode == currentNode ? null : currentNode;
+                        }
+                        else if (startNode != null)
+                        {
+                            // TODO 创建CameraPath
+                            Debug.Log($"add new {hitNode.transform.position}");
+                            startNode = null;
                         }
                     }
                     else
@@ -38,11 +44,11 @@ namespace Common.Editor
                 }
             }
 
-            if (startNode == cameraNode)
+            if (startNode == currentNode)
             {
                 Ray ray = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition);
                 Handles.color = Color.yellow;
-                Handles.DrawLine(cameraNode.transform.position, ray.origin);
+                Handles.DrawLine(currentNode.transform.position, ray.origin);
             }
             
             HandleUtility.Repaint();

@@ -118,5 +118,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d23d55dce47428d9388727452ea3e31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Path: {fileID: 0}
   gizmoColor: {r: 1, g: 0, b: 1, a: 1}
+  pathPrefab: {fileID: 1120709897015053796, guid: 27e38bc07560a23459a0a1691d51d624, type: 3}

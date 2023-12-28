@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Common.CameraNode
 {
     public class CameraNode : MonoBehaviour
     {
-        List<CameraPath> Paths = new List<CameraPath>();
+        HashSet<CameraPath> Paths = new HashSet<CameraPath>();
         public Color gizmoColor = Color.grey;
 #if UNITY_EDITOR
-        public static CameraNode SelectedCameraNode;
+        public GameObject pathPrefab;
 #endif
         public bool Connect(CameraNode other, out GameObject path, GameObject pathParent = null)
         {
@@ -19,7 +18,8 @@ namespace Common.CameraNode
             {
                 return false;
             }
-            path = new GameObject("P_CameraPath");
+            // path = new GameObject("P_CameraPath");
+            path = Object.Instantiate(pathPrefab);
             var cameraPath = path.GetComponent<CameraPath>();
             cameraPath.Begin = this;
             cameraPath.End = other;
@@ -28,13 +28,12 @@ namespace Common.CameraNode
                 path.transform.SetParent(pathParent.transform);
             }
             cameraPath.UpdateTransform();
-            Paths.Add(cameraPath);
-            return true;
+            return Paths.Add(cameraPath);
         }
         
         bool IsConnected(CameraNode other)
         {
-            return other == this || Paths.Find(path => path.IsEndpoint(other)) != null;
+            return other == this || Paths.FirstOrDefault(path => path.IsEndpoint(other)) != null;
         }
         
         void OnDrawGizmos()

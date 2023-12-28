@@ -28,9 +28,13 @@ namespace Common.Editor
                         }
                         else if (startNode != null)
                         {
-                            // TODO 创建CameraPath
-                            Debug.Log($"add new {hitNode.transform.position}");
-                            startNode.Connect(hitNode, out _);
+                            // 创建CameraPath
+                            if (startNode.Connect(hitNode, out GameObject path, GameObject.Find("CameraPaths")))
+                            {
+                                Debug.Log($"connect {startNode.transform.position} " +
+                                          $"to {hitNode.transform.position} " +
+                                          $"with {path.transform.position}");
+                            }
                             startNode = null;
                         }
                     }

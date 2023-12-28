@@ -1,53 +1,85 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Common.CameraNode
 {
     public class CameraNode : MonoBehaviour
     {
-        HashSet<CameraPath> Paths = new HashSet<CameraPath>();
-        public Color gizmoColor = Color.grey;
+        /// <summary>
+        /// 路径宽度
+        /// </summary>
+        public float pathWidth = 1f;
 #if UNITY_EDITOR
-        public GameObject pathPrefab;
+        public Color gizmoColor = Color.magenta;
+        Vector3 pathCenter = new Vector3(0f, 0f, 0f);
+        Vector3 pathSize = new Vector3(0f, 0f, 0f);
 #endif
-        public bool Connect(CameraNode other, out GameObject path, GameObject pathParent = null)
-        {
-            path = null;
-            if (IsConnected(other))
-            {
-                return false;
-            }
-            // path = new GameObject("P_CameraPath");
-            path = Object.Instantiate(pathPrefab);
-            var cameraPath = path.GetComponent<CameraPath>();
-            cameraPath.Begin = this;
-            cameraPath.End = other;
-            if (pathParent != null)
-            {
-                path.transform.SetParent(pathParent.transform);
-            }
-            cameraPath.UpdateTransform();
-            return Paths.Add(cameraPath);
-        }
-        
-        bool IsConnected(CameraNode other)
-        {
-            return other == this || Paths.FirstOrDefault(path => path.IsEndpoint(other)) != null;
-        }
         
         void OnDrawGizmos()
-        {
-            DrawBox();
-        }
-
-        void DrawBox()
         {
             if (!gameObject.activeInHierarchy)
             {
                 return;
             }
-            // 保存原始Gizmos矩阵
+            Quaternion rotation = transform.rotation;
+            UpdateDirectionToParent();
+            DrawPath();
+            transform.rotation = rotation;
+            DrawBox();
+        }
+
+        void UpdateDirectionToParent()
+        {
+            Transform parent = transform.parent;
+            if (parent == null)
+            {
+                return;
+            }
+            var parentNode = parent.GetComponent<CameraNode>();
+            if (parentNode == null)
+            {
+                return;
+            }
+            Vector3 positionEnd = parent.position;
+            Vector3 positionBegin = transform.position;
+            Vector3 direction = positionEnd - positionBegin;
+            
+            transform.rotation = Quaternion.LookRotation(direction.normalized);
+        }
+
+        void DrawPath()
+        {
+            Transform parent = transform.parent;
+            if (parent == null)
+            {
+                return;
+            }
+            var parentNode = parent.GetComponent<CameraNode>();
+            if (parentNode == null)
+            {
+                return;
+            }
+            
+            Vector3 position = transform.position;
+            Vector3 parentPosition = parent.position;
+            
+            // draw link
+            Gizmos.color = gizmoColor;
+            Gizmos.DrawLine(position, parentPosition);
+            
+            // draw path
+            var distance = Vector3.Distance(position, parentPosition);
+            Matrix4x4 originalMatrix = Gizmos.matrix;
+            Gizmos.color = gizmoColor;
+            Gizmos.matrix = transform.localToWorldMatrix;
+            pathCenter.z = distance / 2f;
+            pathSize.x = pathWidth;
+            pathSize.z = distance;
+            Gizmos.DrawWireCube(pathCenter, pathSize);
+            Gizmos.matrix = originalMatrix;
+        }
+
+        void DrawBox()
+        {
             Matrix4x4 originalMatrix = Gizmos.matrix;
             Gizmos.color = gizmoColor;
             Gizmos.matrix = transform.localToWorldMatrix;

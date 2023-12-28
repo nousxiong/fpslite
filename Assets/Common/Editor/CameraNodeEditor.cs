@@ -12,7 +12,7 @@ namespace Common.Editor
         {
             Event e = Event.current;
             var currentNode = (CameraNode.CameraNode)target;
-            Debug.Log($"{currentNode.transform.position} {e.type} OnSceneGUI");
+            // Debug.Log($"{currentNode.transform.position} {e.type} OnSceneGUI");
 
             if (e.type == EventType.MouseDown)
             {
@@ -28,13 +28,13 @@ namespace Common.Editor
                         }
                         else if (startNode != null)
                         {
-                            // 创建CameraPath
-                            if (startNode.Connect(hitNode, out GameObject path, GameObject.Find("CameraPaths")))
+                            Transform transform = startNode.transform;
+                            if (hitNode.transform.parent == transform)
                             {
-                                Debug.Log($"connect {startNode.transform.position} " +
-                                          $"to {hitNode.transform.position} " +
-                                          $"with {path.transform.position}");
+                                hitNode.transform.SetParent(null);
                             }
+                            transform.SetParent(hitNode.transform);
+                            Debug.Log($"connect {transform.position} to {hitNode.transform.position}");
                             startNode = null;
                         }
                     }

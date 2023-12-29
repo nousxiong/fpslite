@@ -10,9 +10,18 @@ namespace Common.CameraNode
         public float pathWidth = 1f;
 #if UNITY_EDITOR
         public Color gizmoColor = Color.magenta;
+        public Color selectedColor = Color.yellow;
         Vector3 pathCenter = new Vector3(0f, 0f, 0f);
         Vector3 pathSize = new Vector3(0f, 0f, 0f);
+        Vector3 arrowLeft = new Vector3(0f, 0f, 0f);
+        Vector3 arrowEdge = new Vector3(0f, 0f, 0f);
+        Vector3 arrowRight = new Vector3(0f, 0f, 0f);
+        public bool selected;
 #endif
+        Color GetColor()
+        {
+            return selected ? selectedColor : gizmoColor;
+        }
         
         void OnDrawGizmos()
         {
@@ -63,18 +72,25 @@ namespace Common.CameraNode
             Vector3 parentPosition = parent.position;
             
             // draw link
-            Gizmos.color = gizmoColor;
+            Gizmos.color = GetColor();
             Gizmos.DrawLine(position, parentPosition);
             
-            // draw path
+            // draw path & arrow
             var distance = Vector3.Distance(position, parentPosition);
             Matrix4x4 originalMatrix = Gizmos.matrix;
-            Gizmos.color = gizmoColor;
+            Gizmos.color = GetColor();
             Gizmos.matrix = transform.localToWorldMatrix;
             pathCenter.z = distance / 2f;
             pathSize.x = pathWidth;
             pathSize.z = distance;
             Gizmos.DrawWireCube(pathCenter, pathSize);
+            arrowLeft.x = -pathWidth / 2f;
+            arrowLeft.z = distance / 3f;
+            arrowRight.x = pathWidth / 2;
+            arrowRight.z = distance / 3f;
+            arrowEdge.z = distance / 3f * 2f;
+            Gizmos.DrawLine(arrowLeft, arrowEdge);
+            Gizmos.DrawLine(arrowRight, arrowEdge);
             Gizmos.matrix = originalMatrix;
         }
 

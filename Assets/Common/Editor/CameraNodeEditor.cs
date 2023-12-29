@@ -52,6 +52,14 @@ namespace Common.Editor
             {
                 startNode = null;
             }
+            else if (e.type == EventType.Layout)
+            {
+                currentNode.selected = true;
+            }
+            else if (e.type == EventType.Used)
+            {
+                currentNode.selected = false;
+            }
 
             if (startNode == currentNode)
             {

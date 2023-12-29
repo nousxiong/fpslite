@@ -48,6 +48,10 @@ namespace Common.Editor
                     startNode = null;
                 }
             }
+            else if (e.type == EventType.MouseDrag)
+            {
+                startNode = null;
+            }
 
             if (startNode == currentNode)
             {

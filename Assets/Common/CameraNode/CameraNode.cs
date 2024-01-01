@@ -8,10 +8,14 @@ namespace Common.CameraNode
         /// 路径宽度
         /// </summary>
         public float pathWidth = 1f;
+        [Header("Tail size, default no tail")]
+        public float tailLength;
 #if UNITY_EDITOR
         public Color gizmoColor = Color.magenta;
         public Color selectedColor = Color.yellow;
         Vector3 pathCenter = new Vector3(0f, 0f, 0f);
+        Vector3 pathEdge = new Vector3(0f, 0f, 0f);
+        Vector3 pathEnd = new Vector3(0f, 0f, 0f);
         Vector3 pathSize = new Vector3(0f, 0f, 0f);
         Vector3 arrowLeft = new Vector3(0f, 0f, 0f);
         Vector3 arrowEdge = new Vector3(0f, 0f, 0f);
@@ -70,27 +74,31 @@ namespace Common.CameraNode
             
             Vector3 position = transform.position;
             Vector3 parentPosition = parent.position;
+            var distance = Vector3.Distance(position, parentPosition);
+            var distanceWithTail = tailLength + distance;
+            Matrix4x4 originalMatrix = Gizmos.matrix;
+            Gizmos.matrix = transform.localToWorldMatrix;
             
             // draw link
             Gizmos.color = GetColor();
-            Gizmos.DrawLine(position, parentPosition);
+            pathEdge.z = distance;
+            pathEnd.z = -tailLength;
+            Gizmos.DrawLine(pathEnd, pathEdge);
             
             // draw path & arrow
-            var distance = Vector3.Distance(position, parentPosition);
-            Matrix4x4 originalMatrix = Gizmos.matrix;
             Gizmos.color = GetColor();
-            Gizmos.matrix = transform.localToWorldMatrix;
-            pathCenter.z = distance / 2f;
+            pathCenter.z = distanceWithTail / 2f - tailLength;
             pathSize.x = pathWidth;
-            pathSize.z = distance;
+            pathSize.z = distanceWithTail;
             Gizmos.DrawWireCube(pathCenter, pathSize);
             arrowLeft.x = -pathWidth / 2f;
-            arrowLeft.z = distance / 3f;
+            arrowLeft.z = distanceWithTail / 3f - tailLength;
             arrowRight.x = pathWidth / 2;
-            arrowRight.z = distance / 3f;
-            arrowEdge.z = distance / 3f * 2f;
+            arrowRight.z = distanceWithTail / 3f - tailLength;
+            arrowEdge.z = distanceWithTail / 3f * 2f - tailLength;
             Gizmos.DrawLine(arrowLeft, arrowEdge);
             Gizmos.DrawLine(arrowRight, arrowEdge);
+            
             Gizmos.matrix = originalMatrix;
         }
 

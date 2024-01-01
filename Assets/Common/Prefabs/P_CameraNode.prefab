@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2426389227448234893}
   - component: {fileID: 5095680090906272446}
   - component: {fileID: 2932211250010828440}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: P_CameraNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -118,5 +118,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d23d55dce47428d9388727452ea3e31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pathWidth: 1
+  tailLength: 0
   gizmoColor: {r: 1, g: 0, b: 1, a: 1}
-  pathPrefab: {fileID: 1120709897015053796, guid: 27e38bc07560a23459a0a1691d51d624, type: 3}
+  selectedColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  selected: 1

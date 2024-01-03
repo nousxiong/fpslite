@@ -7,6 +7,7 @@ namespace Common
 #if UNITY_EDITOR
         public Vector3 size;
         public Color gizmoColor = Color.magenta;
+        public Color parentColor = Color.grey;
         Vector3 pathHead = Vector3.zero;
         Vector3 pathTail = Vector3.zero;
         Vector3 pathXzSize = Vector3.zero;
@@ -28,7 +29,7 @@ namespace Common
             if (hasParent)
             {
                 // Draw line to parent
-                Gizmos.color = Color.grey;
+                Gizmos.color = parentColor;
                 Gizmos.DrawLine(transform.position, parent.position);
             }
             

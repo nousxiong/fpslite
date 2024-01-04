@@ -46,3 +46,6 @@ MonoBehaviour:
   events:
   - Input
   - Startup
+  - Startup/Done
+  - CameraPath/PlayerEnter
+  - CameraPath/PlayerLeave

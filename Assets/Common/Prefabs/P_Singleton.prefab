@@ -48,9 +48,9 @@ MonoBehaviour:
     dataVersion: 2
     usedInTemplate: {fileID: 0}
     name: FSM
-    startState: Init
+    startState: Start
     states:
-    - name: Init
+    - name: Start
       description: 
       colorIndex: 0
       position:
@@ -104,7 +104,7 @@ MonoBehaviour:
         paramByteDataSize: 
     - name: SetSingleton
       description: 
-      colorIndex: 0
+      colorIndex: 1
       position:
         serializedVersion: 2
         x: 207

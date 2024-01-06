@@ -138,39 +138,28 @@ MonoBehaviour:
     dataVersion: 2
     usedInTemplate: {fileID: 0}
     name: FSM
-    startState: PreInit
+    startState: Start
     states:
-    - name: PreInit
+    - name: Start
       description: 
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 130
-        y: 100
+        x: 94
+        y: 108
         width: 100
-        height: 32
+        height: 16
       isBreakpoint: 0
       isSequence: 0
       hideUnused: 0
-      transitions:
-      - fsmEvent:
-          name: FINISHED
-          isSystemEvent: 1
-          isGlobal: 0
-        toState: Init
-        linkStyle: 0
-        linkConstraint: 0
-        linkTarget: 0
-        colorIndex: 0
+      transitions: []
       actionData:
-        actionNames:
-        - HutongGames.PlayMaker.Actions.NextFrameEvent
-        customNames:
-        - 
-        actionEnabled: 01
-        actionIsOpen: 01
-        actionStartIndex: 00000000
-        actionHashCodes: 88611604
+        actionNames: []
+        customNames: []
+        actionEnabled: 
+        actionIsOpen: 
+        actionStartIndex: 
+        actionHashCodes: 
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -193,26 +182,24 @@ MonoBehaviour:
         fsmColorParams: []
         fsmRectParams: []
         fsmQuaternionParams: []
-        stringParams:
-        - FINISHED
+        stringParams: []
         byteData: 
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 17000000
-        paramName:
-        - sendEvent
-        paramDataPos: 00000000
-        paramByteDataSize: 00000000
+        paramDataType: 
+        paramName: []
+        paramDataPos: 
+        paramByteDataSize: 
     - name: Init
       description: "\u6839\u636E\u662F\u5426\u6709parent\u6765\u8BBE\u7F6Epath\u5BF9\u8C61"
       colorIndex: 1
       position:
         serializedVersion: 2
-        x: 125
-        y: 160
-        width: 160.585
+        x: 240
+        y: 161
+        width: 173.115
         height: 32
       isBreakpoint: 0
       isSequence: 0
@@ -1469,7 +1456,19 @@ MonoBehaviour:
     - name: Stay
       isSystemEvent: 0
       isGlobal: 0
-    globalTransitions: []
+    - name: Startup/Done
+      isSystemEvent: 0
+      isGlobal: 1
+    globalTransitions:
+    - fsmEvent:
+        name: Startup/Done
+        isSystemEvent: 0
+        isGlobal: 1
+      toState: Init
+      linkStyle: 0
+      linkConstraint: 0
+      linkTarget: 0
+      colorIndex: 0
     variables:
       floatVariables: []
       intVariables: []

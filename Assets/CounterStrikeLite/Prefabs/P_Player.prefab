@@ -154,7 +154,7 @@ MonoBehaviour:
   fsm:
     dataVersion: 2
     usedInTemplate: {fileID: 0}
-    name: PlayerInput
+    name: Input
     startState: PreInit
     states:
     - name: PreInit
@@ -725,7 +725,7 @@ MonoBehaviour:
       categories:
       - 
       variableCategoryIDs: 0000000000000000000000000000000000000000
-    description: 
+    description: "\u83B7\u53D6+\u4F20\u9012\u5B9E\u65F6\u8F93\u5165"
     docUrl: 
     showStateLabel: 0
     maxLoopCount: 0
@@ -787,7 +787,7 @@ MonoBehaviour:
   fsm:
     dataVersion: 2
     usedInTemplate: {fileID: 0}
-    name: PlayerMovement
+    name: Movement
     startState: Init
     states:
     - name: Init
@@ -795,8 +795,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 50
-        y: 100
+        x: 64
+        y: 105
         width: 100
         height: 16
       isBreakpoint: 0
@@ -804,15 +804,25 @@ MonoBehaviour:
       hideUnused: 0
       transitions: []
       actionData:
-        actionNames: []
-        customNames: []
-        actionEnabled: 
-        actionIsOpen: 
-        actionStartIndex: 
-        actionHashCodes: 
+        actionNames:
+        - HutongGames.PlayMaker.Actions.GetRotation
+        customNames:
+        - 
+        actionEnabled: 01
+        actionIsOpen: 01
+        actionStartIndex: 00000000
+        actionHashCodes: 6ab44904
         unityObjectParams: []
         fsmGameObjectParams: []
-        fsmOwnerDefaultParams: []
+        fsmOwnerDefaultParams:
+        - ownerOption: 0
+          gameObject:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 0}
         animationCurveParams: []
         functionCallParams: []
         fsmTemplateControlParams: []
@@ -824,31 +834,69 @@ MonoBehaviour:
         fsmVarParams: []
         fsmArrayParams: []
         fsmEnumParams: []
-        fsmFloatParams: []
+        fsmFloatParams:
+        - useVariable: 1
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
+        - useVariable: 1
+          name: offsetAngleY
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
+        - useVariable: 1
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
         fsmIntParams: []
         fsmBoolParams: []
         fsmVector2Params: []
-        fsmVector3Params: []
+        fsmVector3Params:
+        - useVariable: 1
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: {x: 0, y: 0, z: 0}
         fsmColorParams: []
         fsmRectParams: []
-        fsmQuaternionParams: []
+        fsmQuaternionParams:
+        - useVariable: 1
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: {x: 0, y: 0, z: 0, w: 0}
         stringParams: []
-        byteData: 
+        byteData: 0100000000
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 
-        paramName: []
-        paramDataPos: 
-        paramByteDataSize: 
+        paramDataType: 14000000230000001c0000000f0000000f0000000f0000000700000001000000
+        paramName:
+        - gameObject
+        - quaternion
+        - vector
+        - xAngle
+        - yAngle
+        - zAngle
+        - space
+        - everyFrame
+        paramDataPos: 0000000000000000000000000000000001000000020000000000000004000000
+        paramByteDataSize: 0000000000000000000000000000000000000000000000000400000001000000
     - name: Move
       description: 
       colorIndex: 3
       position:
         serializedVersion: 2
-        x: 187
-        y: 199
+        x: 65
+        y: 220
         width: 100
         height: 16
       isBreakpoint: 0
@@ -866,6 +914,7 @@ MonoBehaviour:
         - HutongGames.PlayMaker.Actions.SetFloatValue
         - HutongGames.PlayMaker.Actions.SetFloatValue
         - HutongGames.PlayMaker.Actions.FloatClamp
+        - HutongGames.PlayMaker.Actions.FloatAdd
         - HutongGames.PlayMaker.Actions.SetRotation
         customNames:
         - 
@@ -878,10 +927,11 @@ MonoBehaviour:
         - 
         - 
         - 
-        actionEnabled: 01010101010101010101
-        actionIsOpen: 01010101010100000101
-        actionStartIndex: 000000000f00000014000000160000001b0000001e0000002200000025000000280000002c000000
-        actionHashCodes: d9ade603f5ce2c014dad07016f1d0b049845b3052a6e8a009845b3059845b3050c8bc100979e4104
+        - 
+        actionEnabled: 0101010101010101010101
+        actionIsOpen: 0001000001010000000101
+        actionStartIndex: 000000000f00000014000000160000001b0000001e0000002200000025000000280000002c00000030000000
+        actionHashCodes: d9ade603f5ce2c014dad07016f1d0b049845b3052a6e8a009845b3059845b3050c8bc1002a6e8a00979e4104
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 1
@@ -999,7 +1049,7 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 1
           networkSync: 0
-          value: 70
+          value: 50
         - useVariable: 1
           name: angleY
           tooltip: 
@@ -1023,7 +1073,7 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 1
           networkSync: 0
-          value: -5
+          value: -2
         - useVariable: 1
           name: maxAngleY
           tooltip: 
@@ -1035,7 +1085,7 @@ MonoBehaviour:
           tooltip: 
           showInInspector: 1
           networkSync: 0
-          value: 5
+          value: 2
         - useVariable: 1
           name: angleY
           tooltip: 
@@ -1050,6 +1100,18 @@ MonoBehaviour:
           value: 0
         - useVariable: 1
           name: maxAngleY
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
+        - useVariable: 1
+          name: angleY
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
+        - useVariable: 1
+          name: offsetAngleY
           tooltip: 
           showInInspector: 0
           networkSync: 0
@@ -1158,12 +1220,12 @@ MonoBehaviour:
           value: {x: 0, y: 0, z: 0, w: 0}
         stringParams:
         - 
-        byteData: 010000000101010101010101010000000101
+        byteData: 0100000001010101010101010100010000000101
         arrayParamSizes: 
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 130000001200000011000000100000000f000000250000001c00000012000000130000001e0000002300000020000000210000001900000018000000140000001c0000000f00000007000000170000001c000000010000001c0000000f0000000f0000000f000000010000000f0000000f000000010000000f0000000f00000001000000010000000f0000000f000000010000000f0000000f000000010000000f0000000f0000000f0000000100000014000000230000001c0000000f0000000f0000000f000000070000000100000001000000
+        paramDataType: 130000001200000011000000100000000f000000250000001c00000012000000130000001e0000002300000020000000210000001900000018000000140000001c0000000f00000007000000170000001c000000010000001c0000000f0000000f0000000f000000010000000f0000000f000000010000000f0000000f00000001000000010000000f0000000f000000010000000f0000000f000000010000000f0000000f0000000f000000010000000f0000000f000000010000000100000014000000230000001c0000000f0000000f0000000f000000070000000100000001000000
         paramName:
         - sentByGameObject
         - fsmName
@@ -1209,6 +1271,10 @@ MonoBehaviour:
         - minValue
         - maxValue
         - everyFrame
+        - floatVariable
+        - add
+        - everyFrame
+        - perSecond
         - gameObject
         - quaternion
         - vector
@@ -1218,8 +1284,8 @@ MonoBehaviour:
         - space
         - everyFrame
         - lateUpdate
-        paramDataPos: 00000000000000000000000000000000000000000000000000000000010000000100000000000000000000000000000001000000000000000200000000000000010000000100000000000000000000000200000004000000030000000200000003000000040000000500000005000000060000000600000007000000080000000700000008000000090000000a000000090000000b0000000c0000000a0000000d0000000e0000000f0000000b0000000100000001000000040000001000000011000000120000000c0000001000000011000000
-        paramByteDataSize: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000400000000000000000000000100000000000000000000000000000000000000010000000000000000000000010000000000000000000000010000000100000000000000000000000100000000000000000000000100000000000000000000000000000001000000000000000000000000000000000000000000000000000000040000000100000001000000
+        paramDataPos: 00000000000000000000000000000000000000000000000000000000010000000100000000000000000000000000000001000000000000000200000000000000010000000100000000000000000000000200000004000000030000000200000003000000040000000500000005000000060000000600000007000000080000000700000008000000090000000a000000090000000b0000000c0000000a0000000d0000000e0000000f0000000b00000010000000110000000c0000000d0000000100000001000000040000001200000013000000140000000e0000001200000013000000
+        paramByteDataSize: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000040000000000000000000000010000000000000000000000000000000000000001000000000000000000000001000000000000000000000001000000010000000000000000000000010000000000000000000000010000000000000000000000000000000100000000000000000000000100000001000000000000000000000000000000000000000000000000000000040000000100000001000000
     events:
     - name: Input
       isSystemEvent: 0
@@ -1241,19 +1307,19 @@ MonoBehaviour:
         tooltip: 
         showInInspector: 1
         networkSync: 0
-        value: 5
+        value: 2
       - useVariable: 1
         name: MinAngleY
         tooltip: 
         showInInspector: 1
         networkSync: 0
-        value: -5
+        value: -2
       - useVariable: 1
         name: SensitivityY
         tooltip: 
         showInInspector: 1
         networkSync: 0
-        value: 70
+        value: 50
       - useVariable: 1
         name: Speed
         tooltip: 
@@ -1280,6 +1346,12 @@ MonoBehaviour:
         value: 0
       - useVariable: 1
         name: minAngleY
+        tooltip: 
+        showInInspector: 0
+        networkSync: 0
+        value: 0
+      - useVariable: 1
+        name: offsetAngleY
         tooltip: 
         showInInspector: 0
         networkSync: 0
@@ -1312,8 +1384,8 @@ MonoBehaviour:
       enumVariables: []
       categories:
       - 
-      variableCategoryIDs: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
-    description: 
+      variableCategoryIDs: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    description: "\u6839\u636E\u8F93\u5165\u548C\u573A\u666F\uFF0C\u5B9E\u65F6\u5904\u7406Character\u79FB\u52A8\u548C\u8F6C\u5411"
     docUrl: 
     showStateLabel: 0
     maxLoopCount: 0
@@ -1321,7 +1393,7 @@ MonoBehaviour:
     password: 
     locked: 0
     manualUpdate: 0
-    outVariableIndices: 
+    outVariableIndices: 08000000
     keepDelayedEventsOnStateExit: 0
     preprocessed: 0
     ExposedEvents: []
@@ -1375,7 +1447,7 @@ MonoBehaviour:
   fsm:
     dataVersion: 2
     usedInTemplate: {fileID: 0}
-    name: PlayerPaths
+    name: Paths
     startState: Init
     states:
     - name: Init
@@ -1383,8 +1455,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 189
-        y: 104
+        x: 180
+        y: 101
         width: 100
         height: 16
       isBreakpoint: 0
@@ -1432,11 +1504,11 @@ MonoBehaviour:
         paramByteDataSize: 
     - name: AddPath
       description: 
-      colorIndex: 0
+      colorIndex: 3
       position:
         serializedVersion: 2
-        x: 64
-        y: 219
+        x: 55
+        y: 216
         width: 188.42
         height: 32
       isBreakpoint: 0
@@ -1708,11 +1780,11 @@ MonoBehaviour:
         paramByteDataSize: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
     - name: RemovePath
       description: 
-      colorIndex: 0
+      colorIndex: 5
       position:
         serializedVersion: 2
-        x: 65
-        y: 369
+        x: 56
+        y: 366
         width: 192.24
         height: 16
       isBreakpoint: 0
@@ -1926,8 +1998,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 296
-        y: 290
+        x: 287
+        y: 287
         width: 100
         height: 16
       isBreakpoint: 0
@@ -2040,7 +2112,7 @@ MonoBehaviour:
       categories:
       - 
       variableCategoryIDs: 0000000000000000
-    description: 
+    description: "\u5B9E\u65F6\u6DFB\u52A0/\u79FB\u9664\u81EA\u5DF1\u5F53\u524D\u6240\u4F4D\u4E8E\u7684CameraPath"
     docUrl: 
     showStateLabel: 0
     maxLoopCount: 0

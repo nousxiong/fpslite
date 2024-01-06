@@ -118,16 +118,24 @@ MonoBehaviour:
       actionData:
         actionNames:
         - HutongGames.PlayMaker.Actions.FindGameObject
+        - HutongGames.PlayMaker.Actions.FindGameObject
         customNames:
         - 
-        actionEnabled: 01
-        actionIsOpen: 01
-        actionStartIndex: 00000000
-        actionHashCodes: 786b3902
+        - 
+        actionEnabled: 0101
+        actionIsOpen: 0101
+        actionStartIndex: 0000000003000000
+        actionHashCodes: 786b3902786b3902
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 1
           name: Player
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: {fileID: 0}
+        - useVariable: 1
+          name: Joystick
           tooltip: 
           showInInspector: 0
           networkSync: 0
@@ -152,6 +160,18 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: Player
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: P_Joystick
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: GameController
         fsmObjectParams: []
         fsmVarParams: []
         fsmArrayParams: []
@@ -170,13 +190,16 @@ MonoBehaviour:
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 120000001200000013000000
+        paramDataType: 120000001200000013000000120000001200000013000000
         paramName:
         - objectName
         - withTag
         - store
-        paramDataPos: 000000000100000000000000
-        paramByteDataSize: 000000000000000000000000
+        - objectName
+        - withTag
+        - store
+        paramDataPos: 000000000100000000000000020000000300000001000000
+        paramByteDataSize: 000000000000000000000000000000000000000000000000
     events:
     - name: Startup
       isSystemEvent: 0

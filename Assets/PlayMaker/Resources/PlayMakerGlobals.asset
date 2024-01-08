@@ -47,5 +47,5 @@ MonoBehaviour:
   - Input
   - Startup
   - Startup/Done
-  - CameraPath/PlayerEnter
-  - CameraPath/PlayerLeave
+  - CrossPath/PlayerEnter
+  - CrossPath/PlayerLeave

@@ -1585,7 +1585,7 @@ MonoBehaviour:
         serializedVersion: 2
         x: 52
         y: 199
-        width: 188.42
+        width: 176.33
         height: 32
       isBreakpoint: 0
       isSequence: 0
@@ -1609,8 +1609,8 @@ MonoBehaviour:
         - 
         - 
         - 
-        actionEnabled: 010101
-        actionIsOpen: 010101
+        actionEnabled: 000101
+        actionIsOpen: 000101
         actionStartIndex: 000000000f00000015000000
         actionHashCodes: d9ade60375f9ba05978a9b03
         unityObjectParams: []
@@ -1861,7 +1861,7 @@ MonoBehaviour:
         serializedVersion: 2
         x: 53
         y: 349
-        width: 192.24
+        width: 180.15
         height: 16
       isBreakpoint: 0
       isSequence: 0
@@ -1874,8 +1874,8 @@ MonoBehaviour:
         customNames:
         - 
         - 
-        actionEnabled: 0101
-        actionIsOpen: 0101
+        actionEnabled: 0001
+        actionIsOpen: 0001
         actionStartIndex: 000000000f000000
         actionHashCodes: d9ade6039f77b305
         unityObjectParams: []
@@ -2122,18 +2122,18 @@ MonoBehaviour:
         paramDataPos: 
         paramByteDataSize: 
     events:
-    - name: CameraPath/PlayerEnter
-      isSystemEvent: 0
-      isGlobal: 1
-    - name: CameraPath/PlayerLeave
-      isSystemEvent: 0
-      isGlobal: 1
     - name: Logic/True
       isSystemEvent: 0
       isGlobal: 0
+    - name: CrossPath/PlayerEnter
+      isSystemEvent: 0
+      isGlobal: 1
+    - name: CrossPath/PlayerLeave
+      isSystemEvent: 0
+      isGlobal: 1
     globalTransitions:
     - fsmEvent:
-        name: CameraPath/PlayerEnter
+        name: CrossPath/PlayerEnter
         isSystemEvent: 0
         isGlobal: 1
       toState: AddPath
@@ -2142,7 +2142,7 @@ MonoBehaviour:
       linkTarget: 0
       colorIndex: 0
     - fsmEvent:
-        name: CameraPath/PlayerLeave
+        name: CrossPath/PlayerLeave
         isSystemEvent: 0
         isGlobal: 1
       toState: RemovePath

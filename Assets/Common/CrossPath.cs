@@ -50,15 +50,29 @@ namespace Common
             }
 
             UpdateDirectionToParent();
-            if (parent.TryGetComponent(out CrossPath _))
+            
+            Gizmos.color = gizmoColor;
+            if (parent.TryGetComponent(out CrossPath parentPath))
             {
                 // Draw line to parent
-                Gizmos.color = parentColor;
+                Color parentLineColor = parentColor;
+                Color color = parentPath.gizmoColor;
+                Transform grandparent = parent.parent;
+                if (grandparent != null && grandparent.TryGetComponent(out CrossNode grandparentNode))
+                {
+                    parentLineColor = grandparentNode.gizmoColor;
+                    color = grandparentNode.gizmoColor;
+                }
+                Gizmos.color = parentLineColor;
                 Gizmos.DrawLine(selfTransform.position, parent.position);
+                Gizmos.color = color;
             }
-            
+            if (parent.TryGetComponent(out CrossNode parentNode))
+            {
+                Gizmos.color = parentNode.gizmoColor;
+            }
+
             // 保存原始Gizmos矩阵
-            Gizmos.color = gizmoColor;
             Matrix4x4 originalMatrix = Gizmos.matrix;
             Gizmos.matrix = transform.localToWorldMatrix;
             

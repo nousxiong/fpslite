@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7403932139230458846}
   - component: {fileID: 1382928757915574651}
   m_Layer: 0
-  m_Name: P_ForkNode
+  m_Name: P_CrossNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

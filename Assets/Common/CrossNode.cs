@@ -2,7 +2,7 @@
 
 namespace Common
 {
-    public class ForkNode : MonoBehaviour
+    public class CrossNode : MonoBehaviour
     {
 #if UNITY_EDITOR
         public Color gizmoColor = Color.magenta;

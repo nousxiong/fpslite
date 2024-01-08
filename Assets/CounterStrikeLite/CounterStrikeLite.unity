@@ -579,7 +579,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5583195514599931728, guid: 750fcc94c85ea4644bf948df64bdeaeb, type: 3}
       propertyPath: m_Name
-      value: P_ForkPath
+      value: P_CrossPath
       objectReference: {fileID: 0}
     - target: {fileID: 6708993019774083399, guid: 750fcc94c85ea4644bf948df64bdeaeb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -775,7 +775,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3208419201094951029, guid: b37b589d00b346a43bbe15aa3a80091e, type: 3}
       propertyPath: m_Name
-      value: P_ForkNode
+      value: P_CrossNode
       objectReference: {fileID: 0}
     - target: {fileID: 7403932139230458846, guid: b37b589d00b346a43bbe15aa3a80091e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -902,7 +902,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5583195514599931728, guid: 750fcc94c85ea4644bf948df64bdeaeb, type: 3}
       propertyPath: m_Name
-      value: P_ForkPath (1)
+      value: P_CrossPath (1)
       objectReference: {fileID: 0}
     - target: {fileID: 6708993019774083399, guid: 750fcc94c85ea4644bf948df64bdeaeb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1132,7 +1132,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5583195514599931728, guid: 750fcc94c85ea4644bf948df64bdeaeb, type: 3}
       propertyPath: m_Name
-      value: P_ForkPath
+      value: P_CrossPath
       objectReference: {fileID: 0}
     - target: {fileID: 6708993019774083399, guid: 750fcc94c85ea4644bf948df64bdeaeb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1390,7 +1390,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3208419201094951029, guid: b37b589d00b346a43bbe15aa3a80091e, type: 3}
       propertyPath: m_Name
-      value: P_ForkNode
+      value: P_CrossNode
       objectReference: {fileID: 0}
     - target: {fileID: 7403932139230458846, guid: b37b589d00b346a43bbe15aa3a80091e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1664,7 +1664,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1864428220}
   m_Layer: 0
-  m_Name: ForkNodes
+  m_Name: CrossNodes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1936,7 +1936,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3208419201094951029, guid: b37b589d00b346a43bbe15aa3a80091e, type: 3}
       propertyPath: m_Name
-      value: P_ForkNode
+      value: P_CrossNode
       objectReference: {fileID: 0}
     - target: {fileID: 7403932139230458846, guid: b37b589d00b346a43bbe15aa3a80091e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2015,7 +2015,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5583195514599931728, guid: 750fcc94c85ea4644bf948df64bdeaeb, type: 3}
       propertyPath: m_Name
-      value: P_ForkPath
+      value: P_CrossPath
       objectReference: {fileID: 0}
     - target: {fileID: 6708993019774083399, guid: 750fcc94c85ea4644bf948df64bdeaeb, type: 3}
       propertyPath: m_LocalPosition.x

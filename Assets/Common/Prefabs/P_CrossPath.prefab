@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 445218004445423104}
   - component: {fileID: 1044862808354893374}
   m_Layer: 0
-  m_Name: P_ForkPath
+  m_Name: P_CrossPath
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

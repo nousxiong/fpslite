@@ -1,9 +1,8 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Common
 {
-    public class ForkPath : MonoBehaviour
+    public class CrossPath : MonoBehaviour
     {
 #if UNITY_EDITOR
         public Vector3 size;
@@ -51,7 +50,7 @@ namespace Common
             }
 
             UpdateDirectionToParent();
-            if (parent.TryGetComponent<ForkPath>(out ForkPath _))
+            if (parent.TryGetComponent(out CrossPath _))
             {
                 // Draw line to parent
                 Gizmos.color = parentColor;
@@ -88,8 +87,7 @@ namespace Common
             {
                 return;
             }
-            var parentNode = parent.GetComponent<ForkNode>();
-            if (parentNode == null)
+            if (!parent.TryGetComponent(out CrossNode _))
             {
                 return;
             }

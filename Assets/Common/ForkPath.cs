@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Common
 {
@@ -20,6 +21,8 @@ namespace Common
         void DrawBox()
         {
             Matrix4x4 originalMatrix = Gizmos.matrix;
+            Gizmos.matrix = transform.localToWorldMatrix;
+            Gizmos.color = gizmoColor;
             Gizmos.DrawWireCube(Vector3.zero, size);
             pathXzSize.x = size.x;
             pathXzSize.z = size.z;
@@ -35,6 +38,8 @@ namespace Common
                 return;
             }
             
+            SyncCollider();
+            
             // Draw box
             DrawBox();
             
@@ -44,14 +49,14 @@ namespace Common
             {
                 return;
             }
-            
-            Quaternion rotation = selfTransform.rotation;
+
             UpdateDirectionToParent();
-            transform.rotation = rotation;
-            
-            // Draw line to parent
-            Gizmos.color = parentColor;
-            Gizmos.DrawLine(selfTransform.position, parent.position);
+            if (parent.TryGetComponent<ForkPath>(out ForkPath _))
+            {
+                // Draw line to parent
+                Gizmos.color = parentColor;
+                Gizmos.DrawLine(selfTransform.position, parent.position);
+            }
             
             // 保存原始Gizmos矩阵
             Gizmos.color = gizmoColor;
@@ -74,8 +79,6 @@ namespace Common
             
             // 恢复原始Gizmos矩阵
             Gizmos.matrix = originalMatrix;
-            
-            SyncCollider();
         }
         
         void UpdateDirectionToParent()
@@ -115,6 +118,11 @@ namespace Common
             }
 
             pathCollider.size = size;
+        }
+
+        void LateUpdate()
+        {
+            UpdateDirectionToParent();
         }
     }
 }

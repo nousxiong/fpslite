@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 // ReSharper disable CheckNamespace
 
@@ -17,6 +18,11 @@ namespace HutongGames.PlayMaker.Actions
         [UIHint(UIHint.Variable)]
         [Tooltip("The current paths")]
         public FsmArray paths;
+
+        /// <summary>
+        /// 上一次的paths
+        /// </summary>
+        List<GameObject> prevPaths = new List<GameObject>();
 
         public override void Reset()
         {

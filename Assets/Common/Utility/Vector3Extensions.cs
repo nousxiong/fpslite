@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Common.Utiliy
+namespace Common.Utility
 {
     public static class Vector3Extensions
     {
@@ -13,10 +13,11 @@ namespace Common.Utiliy
         {
             return new Vector3(vector.x, 0, vector.z);
         }
-
-        public static Vector2 ProjectionXZVector2(this Vector3 vector)
+        
+        public static void ProjectionXZ(this Vector3 vector, out Vector3 projection)
         {
-            return new Vector2(vector.x, vector.z);
+            projection = vector;
+            projection.y = 0f;
         }
     }
 }

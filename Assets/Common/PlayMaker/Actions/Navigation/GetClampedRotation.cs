@@ -5,6 +5,7 @@ using UnityEngine;
 // ReSharper disable CheckNamespace
 // ReSharper disable UnusedMethodReturnValue.Local
 // ReSharper disable UnassignedField.Global
+// ReSharper disable MemberCanBePrivate.Global
 
 namespace HutongGames.PlayMaker.Actions
 {
@@ -19,12 +20,10 @@ namespace HutongGames.PlayMaker.Actions
         public FsmOwnerDefault gameObject;
 
         [RequiredField]
-        [UIHint(UIHint.Variable)]
         [Tooltip("The fsm name of paths")]
         public FsmString pathsFsmName;
 
         [RequiredField]
-        [UIHint(UIHint.Variable)]
         [Tooltip("The var name of paths")]
         public FsmString pathsVarName;
 
@@ -43,19 +42,20 @@ namespace HutongGames.PlayMaker.Actions
         /// <summary>
         /// 上一次的paths
         /// </summary>
-        List<GameObject> prevPaths = new List<GameObject>();
+        readonly List<GameObject> prevPaths = new List<GameObject>();
         /// <summary>
         /// 上一次到当前新加入的Paths
         /// </summary>
-        List<GameObject> addedPaths = new List<GameObject>();
+        readonly List<GameObject> addedPaths = new List<GameObject>();
         /// <summary>
         /// 上一次到当前移除的Paths
         /// </summary>
-        List<GameObject> removedPaths = new List<GameObject>();
+        readonly List<GameObject> removedPaths = new List<GameObject>();
         /// <summary>
         /// 上一次到当前保留的Paths
         /// </summary>
-        List<GameObject> remainPaths = new List<GameObject>();
+        readonly List<GameObject> remainPaths = new List<GameObject>();
+        readonly List<GameObject> currentPaths = new List<GameObject>();
         /// <summary>
         /// 当前的Path，用于旋转基点计算
         /// </summary>
@@ -80,16 +80,10 @@ namespace HutongGames.PlayMaker.Actions
             pathsFsm = null;
         }
 
-        public override void Init(FsmState state)
-        {
-            base.Init(state);
-            prevPaths.Clear();
-            ClearTempPaths();
-            currentPath = null;
-            
-            go = Fsm.GetOwnerDefaultTarget(gameObject);
-            pathsFsm = ActionHelpers.GetGameObjectFsm(go, pathsVarName.Value)!;
-        }
+        // public override void Init(FsmState state)
+        // {
+        //     base.Init(state);
+        // }
 
         void ClearTempPaths()
         {
@@ -101,6 +95,13 @@ namespace HutongGames.PlayMaker.Actions
 		// Code that runs on entering the state.
 		public override void OnEnter()
         {
+            prevPaths.Clear();
+            currentPaths.Clear();
+            ClearTempPaths();
+            currentPath = null;
+            
+            go = Fsm.GetOwnerDefaultTarget(gameObject);
+            pathsFsm = ActionHelpers.GetGameObjectFsm(go, pathsFsmName.Value)!;
 		}
 
 		// Code that runs every frame.
@@ -136,8 +137,7 @@ namespace HutongGames.PlayMaker.Actions
 
             foreach (GameObject prevPath in prevPaths)
             {
-                var id = -1;
-                id = Array.IndexOf(paths.Values, prevPath);
+                var id = Array.IndexOf(paths.Values, prevPath);
                 var contained = id != -1;
                 if (!contained)
                 {
@@ -152,29 +152,26 @@ namespace HutongGames.PlayMaker.Actions
             
             // save new paths
             prevPaths.Clear();
+            currentPaths.Clear();
             for (var i = 0; i < newCount; i++)
             {
                 var path = paths.Get(i) as GameObject;
                 prevPaths.Add(path);
+                currentPaths.Add(path);
             }
 
             if (addedCount == 0 && removedCount == 0 && remainCount == prevCount && currentPath != null)
             {
                 // no change
-                ClearTempPaths();
                 return;
             }
             
             // 决定当前的Path
             Vector3 dir = go.transform.forward;
             dir.ProjectionXZ(out dirXZ);
-            GameObject newPath = null;
-            if (remainCount > 0)
-            {
-                newPath = GetNearestParallelPath(dirXZ, remainPaths);
-            }
+            GameObject newPath = GetNearestParallelPath(dirXZ, remainPaths);
 
-            if (newPath == null && addedCount > 0)
+            if (newPath == null)
             {
                 newPath = GetNearestParallelPath(dirXZ, addedPaths);
             }
@@ -190,7 +187,7 @@ namespace HutongGames.PlayMaker.Actions
             // offsetAngleY.Value = currentPath.transform.localEulerAngles.y;
             
             // 找出最大夹角范围的2个Paths作为min和max
-            if (prevPaths.Count <= 1)
+            if (currentPaths.Count <= 1)
             {
                 var offsetAngleY = currentPath.transform.localEulerAngles.y;
                 minAngleY.Value = offsetAngleY;
@@ -199,45 +196,85 @@ namespace HutongGames.PlayMaker.Actions
             else
             {
                 // > 1，给所有Paths排序，将currentPath的前后2个path的Y旋转角度取出，作为min和max
-                prevPaths.Sort((a, b) =>
+                currentPaths.Sort((a, b) =>
                 {
                     var aY = a.transform.localEulerAngles.y;
                     var bY = b.transform.localEulerAngles.y;
                     return aY.CompareTo(bY);
                 });
-                var index = prevPaths.IndexOf(currentPath);
-                GameObject prev = null;
-                GameObject next = null;
+                
+                var index = currentPaths.IndexOf(currentPath);
+                if (currentPaths.Count == 2)
+                {
+                    // 需要在两paths的小于180度的位插入一个currentPath
+                    if (Mathf.Abs(currentPaths[0].transform.localEulerAngles.y - currentPaths[1].transform.localEulerAngles.y) < 180)
+                    {
+                        // 插入到1
+                        currentPaths.Insert(1, currentPath);
+                        if (index != 0)
+                        {
+                            index = 2;
+                        }
+                    }
+                    else
+                    {
+                        if (index == 0)
+                        {
+                            // 插入到0
+                            currentPaths.Insert(0, currentPath);
+                            index = 1;
+                        }
+                        else
+                        {
+                            currentPaths.Add(currentPath);
+                        }
+                    }
+                }
+                
+                // 选择prev和next
+                GameObject prev;
+                GameObject next;
+                var invertNextY = false;
                 if (index == 0)
                 {
-                    prev = prevPaths[^1];
-                    next = prevPaths[1];
+                    prev = currentPaths[^1];
+                    next = currentPaths[1];
                 }
-                else if (index == prevPaths.Count - 1)
+                else if (index == currentPaths.Count - 1)
                 {
-                    prev = prevPaths[index - 1];
-                    next = prevPaths[0];
+                    prev = currentPaths[index - 1];
+                    next = currentPaths[0];
                 }
                 else
                 {
-                    prev = prevPaths[index - 1];
-                    next = prevPaths[index + 1];
+                    // 我们想要得是从next 旋转到 prev这个范围
+                    // 当currentPath角度处于next和prev之间时，需要将next表示的旋转方向取反
+                    prev = currentPaths[index - 1];
+                    next = currentPaths[index + 1];
+                    invertNextY = true;
                 }
+                
+                var prevY = prev.transform.localEulerAngles.y;
+                var nextY = next.transform.localEulerAngles.y;
+                if (invertNextY)
+                {
+                    // 取反
+                    nextY = -(360 - nextY);
+                }
+                minAngleY.Value = nextY;
+                maxAngleY.Value = prevY;
             }
-            
-            
-            ClearTempPaths();
         }
 
         GameObject GetNearestParallelPath(Vector3 dir, List<GameObject> pathList)
         {
             GameObject path = null;
-            var angle = 0f;
+            var angle = -1f;
             foreach (GameObject remainPath in pathList)
             {
                 remainPath.transform.forward.ProjectionXZ(out tmpDirXZ);
                 var acuteAngle = Vector3Utility.AcuteAngle(tmpDirXZ, dir);
-                if (acuteAngle < angle)
+                if (angle < 0f || acuteAngle < angle)
                 {
                     angle = acuteAngle;
                     path = remainPath;

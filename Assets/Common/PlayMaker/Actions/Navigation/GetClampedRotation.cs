@@ -27,6 +27,11 @@ namespace HutongGames.PlayMaker.Actions
         [Tooltip("The var name of paths")]
         public FsmString pathsVarName;
 
+        [RequiredField]
+        [UIHint(UIHint.Variable)]
+        [Tooltip("The angleY")]
+        public FsmFloat angleY;
+
         [UIHint(UIHint.Variable)]
         [Tooltip("Store the min angle of Y")]
         public FsmFloat minAngleY;
@@ -160,13 +165,103 @@ namespace HutongGames.PlayMaker.Actions
                 currentPaths.Add(path);
             }
 
-            if (addedCount == 0 && removedCount == 0 && remainCount == prevCount && currentPath != null)
+            if (!(addedCount == 0 && removedCount == 0 && remainCount == prevCount && currentPath != null))
             {
-                // no change
-                return;
-            }
+                // 决定当前的Path
+                DoCurrentPath();
             
-            // 决定当前的Path
+                Debug.Log($"player rotation: {go.transform.localRotation} {go.transform.localEulerAngles}");
+                
+            }
+            // 找出min和max旋转
+            DoClampedRotation();
+            
+            // 根据当前旋转（angleY），调整min和max；如果超过min和max范围，则选择差角值最小的那边设置为当前旋转
+            // DoClampedRotationByGo();
+        }
+
+        void DoClampedRotationByGo()
+        {
+            var rotationY = go.transform.localEulerAngles.y;
+            var minY = minAngleY.Value;
+            var maxY = maxAngleY.Value;
+            
+            if (minY < 0f)
+            {
+                // minY为负
+                minY = minY.InvertAngle();
+                if (rotationY <= maxY || rotationY >= minY)
+                {
+                    return;
+                }
+                if (GetIncludedAngle(rotationY, maxY) <= GetIncludedAngle(rotationY, minY))
+                {
+                    // 靠近maxY
+                    maxAngleY.Value = angleY.Value;
+                }
+                else
+                {
+                    // 靠近mixY
+                    minAngleY.Value = angleY.Value;
+                }
+            }
+            else
+            {
+                // minY为正
+                if (rotationY >= minY || rotationY <= maxY)
+                {
+                    return;
+                }
+                if (GetIncludedAngle(rotationY, maxY) <= GetIncludedAngle(rotationY, minY))
+                {
+                    // 靠近maxY
+                    minAngleY.Value = minAngleY.Value.InvertAngle();
+                    maxAngleY.Value = angleY.Value;
+                    // if (rotationY >= 0f && rotationY < minY)
+                    // {
+                    //     minAngleY.Value = minAngleY.Value.InvertAngle();
+                    //     maxAngleY.Value = rotationY;
+                    // } 
+                    // else if (rotationY > maxY && rotationY <= 360f)
+                    // {
+                    //     maxAngleY.Value = rotationY;
+                    // }
+                }
+                else
+                {
+                    // 靠近mixY
+                    minAngleY.Value = angleY.Value;
+                    maxAngleY.Value = maxAngleY.Value.InvertAngle();
+                    // if (rotationY > maxY && rotationY <= 360f)
+                    // {
+                    //     minAngleY.Value = rotationY.InvertAngle();
+                    // } 
+                    // else if (rotationY >= 0f && rotationY < minY)
+                    // {
+                    //     minAngleY.Value = rotationY;
+                    // }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 获取从from到to的夹角
+        /// </summary>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <returns></returns>
+        float GetIncludedAngle(float from, float to)
+        {
+            var angle = Mathf.Abs(from - to);
+            if (angle > 180f)
+            {
+                angle = 360f - angle;
+            }
+            return angle;
+        }
+
+        void DoCurrentPath()
+        {
             Vector3 dir = go.transform.forward;
             dir.ProjectionXZ(out dirXZ);
             GameObject newPath = GetNearestParallelPath(dirXZ, remainPaths);
@@ -182,18 +277,60 @@ namespace HutongGames.PlayMaker.Actions
                 newPath = currentPath == null ? go : currentPath;
             }
             currentPath = newPath;
+        }
 
-            // 当前Path作为offsetAngleY
-            // offsetAngleY.Value = currentPath.transform.localEulerAngles.y;
-            
+        void SetClampedRotation(float minY, float maxY)
+        {
+            if (angleY.Value >= 0f)
+            {
+                if (minY >= maxY)
+                {
+                    minAngleY.Value = maxY;
+                    maxAngleY.Value = minY;
+                }
+                else
+                {
+                    minAngleY.Value = minY;
+                    maxAngleY.Value = maxY;
+                }
+            }
+            else
+            {
+                if (minY >= maxY)
+                {
+                    minAngleY.Value = maxY.InvertAngle();
+                    maxAngleY.Value = minY.InvertAngle();
+                }
+                else
+                {
+                    minAngleY.Value = minY.InvertAngle();
+                    maxAngleY.Value = maxY.InvertAngle();
+                }
+            }
+        }
+
+        void DoClampedRotation()
+        {
             // 找出最大夹角范围的2个Paths作为min和max
             if (currentPaths.Count <= 1)
             {
-                var offsetAngleY = currentPath.transform.localEulerAngles.y;
-                minAngleY.Value = offsetAngleY;
-                maxAngleY.Value = offsetAngleY;
+                if (currentPath != go)
+                {
+                    // 从go转到currentPath
+                    var minY = go.transform.localEulerAngles.y;
+                    var maxY = currentPath.transform.localEulerAngles.y;
+                    SetClampedRotation(minY, maxY);
+                }
+                else
+                {
+                    var offsetAngleY = currentPath.transform.localEulerAngles.y;
+                    // minAngleY.Value = offsetAngleY - 0.1f;
+                    // maxAngleY.Value = offsetAngleY + 0.1f;
+                    SetClampedRotation((offsetAngleY - 0.1f).InvertIfNegative(), offsetAngleY + 0.1f);
+                }
+                return;
             }
-            else
+            
             {
                 // > 1，给所有Paths排序，将currentPath的前后2个path的Y旋转角度取出，作为min和max
                 currentPaths.Sort((a, b) =>
@@ -206,8 +343,9 @@ namespace HutongGames.PlayMaker.Actions
                 var index = currentPaths.IndexOf(currentPath);
                 if (currentPaths.Count == 2)
                 {
-                    // 需要在两paths的小于180度的位插入一个currentPath
-                    if (Mathf.Abs(currentPaths[0].transform.localEulerAngles.y - currentPaths[1].transform.localEulerAngles.y) < 180)
+                    // 需要在两paths的小于180度的位置插入一个currentPath
+                    if (Mathf.Abs(currentPaths[0].transform.localEulerAngles.y - 
+                                  currentPaths[1].transform.localEulerAngles.y) < 180)
                     {
                         // 插入到1
                         currentPaths.Insert(1, currentPath);
@@ -235,10 +373,13 @@ namespace HutongGames.PlayMaker.Actions
                 GameObject prev;
                 GameObject next;
                 var invertNextY = false;
+                // var invertPrev = false;
                 if (index == 0)
                 {
                     prev = currentPaths[^1];
                     next = currentPaths[1];
+                    // invertPrev = true;
+                    // invertNextY = true;
                 }
                 else if (index == currentPaths.Count - 1)
                 {
@@ -255,12 +396,18 @@ namespace HutongGames.PlayMaker.Actions
                 }
                 
                 var prevY = prev.transform.localEulerAngles.y;
+                // if (invertPrev)
+                // {
+                //     // 取反
+                //     prevY = prevY.InvertAngle();
+                // }
                 var nextY = next.transform.localEulerAngles.y;
                 if (invertNextY)
                 {
                     // 取反
-                    nextY = -(360 - nextY);
+                    nextY = nextY.InvertAngle();
                 }
+                // SetClampedRotation(nextY, prevY);
                 minAngleY.Value = nextY;
                 maxAngleY.Value = prevY;
             }

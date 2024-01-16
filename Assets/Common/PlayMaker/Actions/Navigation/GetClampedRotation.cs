@@ -260,7 +260,7 @@ namespace HutongGames.PlayMaker.Actions
                 // 选择prev和next
                 GameObject prev;
                 GameObject next;
-                // var invertNextY = false;
+                var invertNextY = false;
                 // var invertPrev = false;
                 if (index == 0)
                 {
@@ -280,7 +280,7 @@ namespace HutongGames.PlayMaker.Actions
                     // 当currentPath角度处于next和prev之间时，需要将next表示的旋转方向取反
                     prev = currentPaths[index - 1];
                     next = currentPaths[index + 1];
-                    // invertNextY = true;
+                    invertNextY = true;
                 }
                 
                 var prevY = prev.transform.localEulerAngles.y;
@@ -290,14 +290,14 @@ namespace HutongGames.PlayMaker.Actions
                 //     prevY = prevY.InvertAngle();
                 // }
                 var nextY = next.transform.localEulerAngles.y;
-                // if (invertNextY)
-                // {
-                //     // 取反
-                //     nextY = nextY.InvertAngle();
-                // }
+                if (invertNextY)
+                {
+                    // 取反
+                    nextY = nextY.InvertAngle();
+                }
                 // SetClampedRotation(nextY, prevY);
-                minAngleY.Value = nextY.InvertIf180();
-                maxAngleY.Value = prevY.InvertIf180();
+                minAngleY.Value = nextY.InvertBySign(angleY.Value);
+                maxAngleY.Value = prevY.InvertBySign(angleY.Value);
             }
         }
 

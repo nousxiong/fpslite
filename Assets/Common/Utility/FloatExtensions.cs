@@ -26,5 +26,15 @@
                 _ => angle
             };
         }
+        
+        public static float InvertBySign(this float angle, float signAngle)
+        {
+            return angle switch
+            {
+                >= 180f when signAngle < 0f => angle.InvertAngle(),
+                < -180f when signAngle >= 0f => angle.InvertAngle(),
+                _ => angle
+            };
+        }
     }
 }

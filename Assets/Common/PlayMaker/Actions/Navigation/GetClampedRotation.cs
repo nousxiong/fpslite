@@ -169,95 +169,10 @@ namespace HutongGames.PlayMaker.Actions
             {
                 // 决定当前的Path
                 DoCurrentPath();
-            
-                Debug.Log($"player rotation: {go.transform.localRotation} {go.transform.localEulerAngles}");
                 
+                // 找出min和max旋转
+                DoClampedRotation();
             }
-            // 找出min和max旋转
-            DoClampedRotation();
-            
-            // 根据当前旋转（angleY），调整min和max；如果超过min和max范围，则选择差角值最小的那边设置为当前旋转
-            // DoClampedRotationByGo();
-        }
-
-        void DoClampedRotationByGo()
-        {
-            var rotationY = go.transform.localEulerAngles.y;
-            var minY = minAngleY.Value;
-            var maxY = maxAngleY.Value;
-            
-            if (minY < 0f)
-            {
-                // minY为负
-                minY = minY.InvertAngle();
-                if (rotationY <= maxY || rotationY >= minY)
-                {
-                    return;
-                }
-                if (GetIncludedAngle(rotationY, maxY) <= GetIncludedAngle(rotationY, minY))
-                {
-                    // 靠近maxY
-                    maxAngleY.Value = angleY.Value;
-                }
-                else
-                {
-                    // 靠近mixY
-                    minAngleY.Value = angleY.Value;
-                }
-            }
-            else
-            {
-                // minY为正
-                if (rotationY >= minY || rotationY <= maxY)
-                {
-                    return;
-                }
-                if (GetIncludedAngle(rotationY, maxY) <= GetIncludedAngle(rotationY, minY))
-                {
-                    // 靠近maxY
-                    minAngleY.Value = minAngleY.Value.InvertAngle();
-                    maxAngleY.Value = angleY.Value;
-                    // if (rotationY >= 0f && rotationY < minY)
-                    // {
-                    //     minAngleY.Value = minAngleY.Value.InvertAngle();
-                    //     maxAngleY.Value = rotationY;
-                    // } 
-                    // else if (rotationY > maxY && rotationY <= 360f)
-                    // {
-                    //     maxAngleY.Value = rotationY;
-                    // }
-                }
-                else
-                {
-                    // 靠近mixY
-                    minAngleY.Value = angleY.Value;
-                    maxAngleY.Value = maxAngleY.Value.InvertAngle();
-                    // if (rotationY > maxY && rotationY <= 360f)
-                    // {
-                    //     minAngleY.Value = rotationY.InvertAngle();
-                    // } 
-                    // else if (rotationY >= 0f && rotationY < minY)
-                    // {
-                    //     minAngleY.Value = rotationY;
-                    // }
-                }
-            }
-        }
-
-        /// <summary>
-        /// 获取从from到to的夹角
-        /// </summary>
-        /// <param name="from"></param>
-        /// <param name="to"></param>
-        /// <returns></returns>
-        float GetIncludedAngle(float from, float to)
-        {
-            var angle = Mathf.Abs(from - to);
-            if (angle > 180f)
-            {
-                angle = 360f - angle;
-            }
-            return angle;
         }
 
         void DoCurrentPath()

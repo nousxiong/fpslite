@@ -9,28 +9,22 @@
         
         public static float InvertIf360(this float angle)
         {
-            if (angle >= 360f)
+            return angle switch
             {
-                return angle.InvertAngle();
-            }
-            if (angle <= -360f)
-            {
-                return angle.InvertAngle();
-            }
-            return angle;
+                >= 360f => angle.InvertAngle(),
+                <= -360f => angle.InvertAngle(),
+                _ => angle
+            };
         }
         
         public static float InvertIf180(this float angle)
         {
-            if (angle >= 180f)
+            return angle switch
             {
-                return angle.InvertAngle();
-            }
-            if (angle <= -180f)
-            {
-                return angle.InvertAngle();
-            }
-            return angle;
+                >= 180f => angle.InvertAngle(),
+                <= -180f => angle.InvertAngle(),
+                _ => angle
+            };
         }
     }
 }

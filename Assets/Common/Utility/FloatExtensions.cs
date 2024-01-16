@@ -1,10 +1,18 @@
-﻿namespace Common.Utility
+﻿using UnityEngine;
+
+namespace Common.Utility
 {
     public static class FloatExtensions
     {
         public static float InvertAngle(this float angle)
         {
-            return -(360f - angle);
+            // return -(360f - angle);
+            var absFloat = 360f - Mathf.Abs(angle);
+            if (angle >= 0f)
+            {
+                absFloat = -absFloat;
+            }
+            return absFloat;
         }
         
         public static float InvertIf360(this float angle)
@@ -34,6 +42,16 @@
                 >= 180f when signAngle < 0f => angle.InvertAngle(),
                 < -180f when signAngle >= 0f => angle.InvertAngle(),
                 _ => angle
+            };
+        }
+
+        public static bool IsInvertBySign(this float angle, float signAngle)
+        {
+            return angle switch
+            {
+                >= 180f when signAngle < 0f => true,
+                < -180f when signAngle >= 0f => true,
+                _ => false
             };
         }
     }

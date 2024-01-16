@@ -20,6 +20,9 @@ namespace HutongGames.PlayMaker.Actions
         public FsmOwnerDefault gameObject;
 
         [RequiredField]
+        public FsmGameObject forward;
+
+        [RequiredField]
         [Tooltip("The fsm name of paths")]
         public FsmString pathsFsmName;
 
@@ -73,6 +76,8 @@ namespace HutongGames.PlayMaker.Actions
         // cache
         GameObject go;
         PlayMakerFSM pathsFsm;
+        float curMinY;
+        float curMaxY;
 
         public override void Reset()
         {
@@ -165,6 +170,8 @@ namespace HutongGames.PlayMaker.Actions
                 currentPaths.Add(path);
             }
 
+            angleY.Value = angleY.Value.InvertIf180();
+
             if (!(addedCount == 0 && removedCount == 0 && remainCount == prevCount && currentPath != null))
             {
                 // 决定当前的Path
@@ -172,42 +179,114 @@ namespace HutongGames.PlayMaker.Actions
                 
                 // 找出min和max旋转
                 DoClampedRotation();
+
+                // 将当前的clamped保存
+                curMinY = minAngleY.Value;
+                curMaxY = maxAngleY.Value;
+            }
+
+            // 实时根据go方向修正
+            currentPaths.Clear();
+            foreach (GameObject prevPath in prevPaths)
+            {
+                currentPaths.Add(prevPath);
+            }
+
+            if (currentPaths.Count < 2)
+            {
+                return;
+            }
+
+            GameObject fwd = forward.Value;
+            currentPaths.Add(go);
+            currentPaths.Add(fwd);
+            // 给所有Paths排序，将currentPath的前后2个path的Y旋转角度取出，作为min和max
+            currentPaths.Sort((a, b) =>
+            {
+                var aY = a == go ? GetReversedAngleY(a) : a == fwd ? a.transform.eulerAngles.y : a.transform.localEulerAngles.y;
+                var bY = b == go ? GetReversedAngleY(b) : b == fwd ? b.transform.eulerAngles.y : b.transform.localEulerAngles.y;
+                return aY.CompareTo(bY);
+            });
+            var index = currentPaths.IndexOf(currentPath);
+            
+            // 选择prev和next
+            GameObject prev;
+            GameObject next;
+            var invertNextY = false;
+            if (index == 0)
+            {
+                prev = currentPaths[^1];
+                next = currentPaths[1];
+            }
+            else if (index == currentPaths.Count - 1)
+            {
+                prev = currentPaths[index - 1];
+                next = currentPaths[0];
+            }
+            else
+            {
+                prev = currentPaths[index - 1];
+                next = currentPaths[index + 1];
+                invertNextY = true;
+            }
+                
+            var prevY = prev == fwd ? prev.transform.eulerAngles.y : prev.transform.localEulerAngles.y;
+            var nextY = next == fwd ? next.transform.eulerAngles.y : next.transform.localEulerAngles.y;
+            if (invertNextY)
+            {
+                // 取反
+                nextY = nextY.InvertAngle();
+                minAngleY.Value = nextY;
+                maxAngleY.Value = prevY;
+            }
+            else
+            {
+                var signAngleY = angleY.Value;
+                prevY = prevY.InvertBySign(signAngleY);
+                if (prevY < nextY)
+                {
+                    nextY = nextY.InvertAngle();
+                }
+                minAngleY.Value = nextY;
+                maxAngleY.Value = prevY;
             }
         }
 
         void DoCurrentPath()
         {
-            Vector3 dir = go.transform.forward;
-            dir.ProjectionXZ(out dirXZ);
-            GameObject newPath = GetNearestParallelPath(dirXZ, remainPaths);
-
-            if (newPath == null)
-            {
-                newPath = GetNearestParallelPath(dirXZ, addedPaths);
-            }
-
-            if (newPath == null)
-            {
-                // 如果不存在path、旧path也不存在，选择自己
-                newPath = currentPath == null ? go : currentPath;
-            }
-            currentPath = newPath;
+            // Vector3 dir = go.transform.forward;
+            // dir.ProjectionXZ(out dirXZ);
+            // GameObject newPath = GetNearestParallelPath(dirXZ, remainPaths);
+            //
+            // if (newPath == null)
+            // {
+            //     newPath = GetNearestParallelPath(dirXZ, addedPaths);
+            // }
+            //
+            // if (newPath == null)
+            // {
+            //     // 如果不存在path、旧path也不存在，选择自己
+            //     newPath = currentPath == null ? go : currentPath;
+            // }
+            // currentPath = newPath;
+            currentPath = go;
         }
 
         void DoClampedRotation()
         {
             // 找出最大夹角范围的2个Paths作为min和max
-            if (currentPaths.Count <= 1)
+            if (currentPaths.Count == 0)
             {
-                if (currentPath != go)
-                {
-                    if (!currentPaths.Contains(currentPath))
-                    {
-                        currentPaths.Add(currentPath);
-                    }
-                    currentPaths.Add(go);
-                }
-                else
+                // if (currentPath != go)
+                // {
+                //     if (!currentPaths.Contains(currentPath))
+                //     {
+                //         currentPaths.Add(currentPath);
+                //     }
+                //     currentPaths.Add(go);
+                // }
+                // else
+                if (currentPath == go)
                 {
                     // go itself
                     var offsetAngleY = currentPath.transform.localEulerAngles.y.InvertIf180();
@@ -219,12 +298,22 @@ namespace HutongGames.PlayMaker.Actions
                 }
             }
             
+            // if (currentPath != go)
             {
+                // if (!currentPaths.Contains(currentPath))
+                // {
+                //     currentPaths.Add(currentPath);
+                // }
+                currentPaths.Add(go);
+            }
+            
+            {
+                var inCross = currentPaths.Count > 2;
                 // > 1，给所有Paths排序，将currentPath的前后2个path的Y旋转角度取出，作为min和max
                 currentPaths.Sort((a, b) =>
                 {
-                    var aY = a.transform.localEulerAngles.y;
-                    var bY = b.transform.localEulerAngles.y;
+                    var aY = inCross && a == go ? GetReversedAngleY(a) : a.transform.localEulerAngles.y;
+                    var bY = inCross && b == go ? GetReversedAngleY(b) : b.transform.localEulerAngles.y;
                     return aY.CompareTo(bY);
                 });
                 
@@ -294,12 +383,34 @@ namespace HutongGames.PlayMaker.Actions
                 {
                     // 取反
                     nextY = nextY.InvertAngle();
+                    minAngleY.Value = nextY;
+                    maxAngleY.Value = prevY;
+                }
+                else
+                {
+                    prevY = prevY.InvertBySign(angleY.Value);
+                    if (prevY < nextY)
+                    {
+                        nextY = nextY.InvertAngle();
+                    }
+                    minAngleY.Value = nextY;
+                    maxAngleY.Value = prevY;
                 }
                 // SetClampedRotation(nextY, prevY);
-                minAngleY.Value = nextY.InvertBySign(angleY.Value);
-                maxAngleY.Value = prevY.InvertBySign(angleY.Value);
             }
         }
+
+        float GetReversedAngleY(GameObject path)
+        {
+            var angle = path.transform.localEulerAngles.y;
+            return angle switch
+            {
+                >= 180 => angle - 180f,
+                < 180 => angle + 180f,
+                _ => angle
+            };
+        }
+        
 
         GameObject GetNearestParallelPath(Vector3 dir, List<GameObject> pathList)
         {

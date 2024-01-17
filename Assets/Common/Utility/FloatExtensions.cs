@@ -15,12 +15,12 @@ namespace Common.Utility
             return absFloat;
         }
         
-        public static float InvertIf360(this float angle)
+        public static float ClampAngleIn360(this float angle)
         {
             return angle switch
             {
-                >= 360f => angle.InvertAngle(),
-                <= -360f => angle.InvertAngle(),
+                >= 360f => angle - 360f,
+                <= -360f => angle + 360f,
                 _ => angle
             };
         }

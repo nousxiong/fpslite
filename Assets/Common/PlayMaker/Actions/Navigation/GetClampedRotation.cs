@@ -78,6 +78,14 @@ namespace HutongGames.PlayMaker.Actions
         PlayMakerFSM pathsFsm;
         float curMinY;
         float curMaxY;
+        ClampType lastPathsChangeClampType;
+
+        enum ClampType
+        {
+            Direct,
+            InvertNextTrue,
+            InvertNextFalse
+        }
 
         public override void Reset()
         {
@@ -170,10 +178,11 @@ namespace HutongGames.PlayMaker.Actions
                 currentPaths.Add(path);
             }
 
-            angleY.Value = angleY.Value.InvertIf180();
+            angleY.Value = angleY.Value.ClampAngleIn360();
 
             if (!(addedCount == 0 && removedCount == 0 && remainCount == prevCount && currentPath != null))
             {
+                lastPathsChangeClampType = ClampType.Direct;
                 // 决定当前的Path
                 DoCurrentPath();
                 
@@ -194,6 +203,19 @@ namespace HutongGames.PlayMaker.Actions
 
             if (currentPaths.Count < 2)
             {
+                switch (lastPathsChangeClampType)
+                {
+                    case ClampType.Direct: 
+                        angleY.Value = Mathf.Clamp(angleY.Value, minAngleY.Value, maxAngleY.Value);
+                        break;
+                    case ClampType.InvertNextTrue:
+                        ClampAngleY(true);
+                        break;
+                    case ClampType.InvertNextFalse:
+                        ClampAngleY(false);
+                        break;
+                }
+                // angleY.Value = Mathf.Clamp(angleY.Value, minAngleY.Value, maxAngleY.Value);
                 return;
             }
 
@@ -236,19 +258,42 @@ namespace HutongGames.PlayMaker.Actions
             {
                 // 取反
                 nextY = nextY.InvertAngle();
-                minAngleY.Value = nextY;
-                maxAngleY.Value = prevY;
             }
-            else
+            
+            minAngleY.Value = nextY;
+            maxAngleY.Value = prevY;
+
+            ClampAngleY(invertNextY);
+            // else
+            // {
+            //     var signAngleY = angleY.Value;
+            //     prevY = prevY.InvertBySign(signAngleY);
+            //     if (prevY < nextY)
+            //     {
+            //         nextY = nextY.InvertAngle();
+            //     }
+            //     minAngleY.Value = nextY;
+            //     maxAngleY.Value = prevY;
+            // }
+        }
+
+        void ClampAngleY(bool invertNextY)
+        {
+            var inverted = false;
+            if (!invertNextY && angleY.Value < 0f)
             {
-                var signAngleY = angleY.Value;
-                prevY = prevY.InvertBySign(signAngleY);
-                if (prevY < nextY)
-                {
-                    nextY = nextY.InvertAngle();
-                }
-                minAngleY.Value = nextY;
-                maxAngleY.Value = prevY;
+                angleY.Value = angleY.Value.InvertAngle();
+                inverted = true;
+            }
+            // if (invertNextY && angleY.Value > 0f)
+            // {
+            //     angleY.Value = angleY.Value.InvertAngle();
+            //     inverted = true;
+            // }
+            angleY.Value = Mathf.Clamp(angleY.Value, minAngleY.Value, maxAngleY.Value);
+            if (inverted)
+            {
+                angleY.Value = angleY.Value.InvertAngle();
             }
         }
 
@@ -294,8 +339,17 @@ namespace HutongGames.PlayMaker.Actions
                     var maxY = offsetAngleY + 0.1f;
                     minAngleY.Value = minY;
                     maxAngleY.Value = maxY;
+                    // ClampAngleY(false);
+                    // lastPathsChangeInverted = false;
+                    angleY.Value = Mathf.Clamp(angleY.Value, minAngleY.Value, maxAngleY.Value);
+                    lastPathsChangeClampType = ClampType.Direct;
                     return;
                 }
+            }
+
+            if (currentPaths.Count >= 2)
+            {
+                return;
             }
             
             // if (currentPath != go)
@@ -383,19 +437,22 @@ namespace HutongGames.PlayMaker.Actions
                 {
                     // 取反
                     nextY = nextY.InvertAngle();
-                    minAngleY.Value = nextY;
-                    maxAngleY.Value = prevY;
                 }
-                else
-                {
-                    prevY = prevY.InvertBySign(angleY.Value);
-                    if (prevY < nextY)
-                    {
-                        nextY = nextY.InvertAngle();
-                    }
-                    minAngleY.Value = nextY;
-                    maxAngleY.Value = prevY;
-                }
+                minAngleY.Value = nextY;
+                maxAngleY.Value = prevY;
+
+                ClampAngleY(invertNextY);
+                lastPathsChangeClampType = invertNextY ? ClampType.InvertNextTrue : ClampType.InvertNextFalse;
+                // else
+                // {
+                //     prevY = prevY.InvertBySign(angleY.Value);
+                //     if (prevY < nextY)
+                //     {
+                //         nextY = nextY.InvertAngle();
+                //     }
+                //     minAngleY.Value = nextY;
+                //     maxAngleY.Value = prevY;
+                // }
                 // SetClampedRotation(nextY, prevY);
             }
         }

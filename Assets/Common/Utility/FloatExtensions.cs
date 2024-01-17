@@ -25,6 +25,11 @@ namespace Common.Utility
             };
         }
         
+        public static float InvertIfNegtive(this float angle)
+        {
+            return angle < 0f ? angle.InvertAngle() : angle;
+        }
+        
         public static float InvertIf180(this float angle)
         {
             return angle switch

@@ -76,8 +76,6 @@ namespace HutongGames.PlayMaker.Actions
         // cache
         GameObject go;
         PlayMakerFSM pathsFsm;
-        float curMinY;
-        float curMaxY;
         ClampType lastPathsChangeClampType;
 
         enum ClampType
@@ -188,10 +186,6 @@ namespace HutongGames.PlayMaker.Actions
                 
                 // 找出min和max旋转
                 DoClampedRotation();
-
-                // 将当前的clamped保存
-                curMinY = minAngleY.Value;
-                curMaxY = maxAngleY.Value;
             }
 
             // 实时根据go方向修正
@@ -279,22 +273,62 @@ namespace HutongGames.PlayMaker.Actions
 
         void ClampAngleY(bool invertNextY)
         {
-            var inverted = false;
-            if (!invertNextY && angleY.Value < 0f)
+            var clamped = Mathf.Clamp(angleY.Value, minAngleY.Value, maxAngleY.Value);
+            if (Mathf.Abs(clamped - angleY.Value) <= 0.001f)
             {
-                angleY.Value = angleY.Value.InvertAngle();
-                inverted = true;
+                angleY.Value = clamped;
+                return;
             }
+            
+            var inverted = false;
+            var angleToMin = GetDiffAngle(angleY.Value, minAngleY.Value);
+            var angleToMax = GetDiffAngle(angleY.Value, maxAngleY.Value);
+            var invertedValue = angleY.Value;
+            if (angleToMin <= angleToMax)
+            {
+                // 更加靠近minAngleY
+                if (Mathf.Abs(clamped - minAngleY.Value) > 0.001f)
+                {
+                    invertedValue = angleY.Value.InvertAngle();
+                    inverted = true;
+                }
+            }
+            else
+            {
+                // 更加靠近maxAngleY
+                if (Mathf.Abs(clamped - maxAngleY.Value) > 0.001f)
+                {
+                    invertedValue = angleY.Value.InvertAngle();
+                    inverted = true;
+                }
+            }
+            
+            // var inverted = false;
+            // if (!invertNextY && angleY.Value < 0f)
+            // {
+            //     angleY.Value = angleY.Value.InvertAngle();
+            //     inverted = true;
+            // }
             // if (invertNextY && angleY.Value > 0f)
             // {
             //     angleY.Value = angleY.Value.InvertAngle();
             //     inverted = true;
             // }
-            angleY.Value = Mathf.Clamp(angleY.Value, minAngleY.Value, maxAngleY.Value);
+            invertedValue = Mathf.Clamp(invertedValue, minAngleY.Value, maxAngleY.Value);
             if (inverted)
             {
-                angleY.Value = angleY.Value.InvertAngle();
+                angleY.Value = invertedValue.InvertAngle();
             }
+        }
+
+        float GetDiffAngle(float angle1, float angle2)
+        {
+            var angle = Mathf.Abs(angle1.InvertIfNegtive() - angle2.InvertIfNegtive());
+            if (angle > 180f)
+            {
+                angle = 360f - angle;
+            }
+            return angle;
         }
 
         void DoCurrentPath()

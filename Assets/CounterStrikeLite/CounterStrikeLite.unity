@@ -2087,6 +2087,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5080714401655017307, guid: b31d9366a2f7a1e458d30bafd718f57b, type: 3}
+      propertyPath: fsm.variables.floatVariables.Array.data[2].value
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

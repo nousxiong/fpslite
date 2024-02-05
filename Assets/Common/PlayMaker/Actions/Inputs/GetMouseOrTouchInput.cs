@@ -58,6 +58,11 @@ namespace Common.PlayMaker.Actions.Inputs
             }
             else
             {
+                if (!Input.GetMouseButton(0))
+                {
+                    moveX.Value = 0f;
+                    moveY.Value = 0f;
+                }
                 if (mouseDown && !Input.GetMouseButton(0)) return;
                 GetMouseInput();
             }
@@ -77,6 +82,11 @@ namespace Common.PlayMaker.Actions.Inputs
                     moveY.Value = deltaPosition.y;
                 }
             }
+            else
+            {
+                moveX.Value = 0f;
+                moveY.Value = 0f;
+            }
 #else
             if (Input.touchCount > 0)
             {
@@ -87,6 +97,12 @@ namespace Common.PlayMaker.Actions.Inputs
                     moveX.Value = deltaPosition.x;
                     moveY.Value = deltaPosition.y;
                 }
+            }
+            else
+            {
+                
+                moveX.Value = 0f;
+                moveY.Value = 0f;
             }
 #endif
         }

@@ -23,17 +23,28 @@ namespace Common.PlayMaker.Actions.Inputs
         [UIHint(UIHint.Variable)]
         [HutongGames.PlayMaker.Tooltip("Store the input movement of Y")]
         public FsmFloat moveY;
+
+        [UIHint(UIHint.Variable)]
+        [HutongGames.PlayMaker.Tooltip("Store the input whether or not up, e.g. mouse up or touch up")]
+        public FsmBool inputUp;
+
+        [UIHint(UIHint.Variable)]
+        [HutongGames.PlayMaker.Tooltip("Store the input whether or not push down")]
+        public FsmBool holdDown;
         
         [HutongGames.PlayMaker.Tooltip("是否需要鼠标按下才获取鼠标移动.")]
         public bool mouseDown = true;
         
         [HutongGames.PlayMaker.Tooltip("Repeat every frame.")]
         public bool everyFrame;
-
+        
+        bool curInputDown;
+        
         public override void Reset()
         {
             mouseDown = true;
             everyFrame = false;
+            curInputDown = false;
         }
 
         public override void OnEnter()
@@ -58,22 +69,22 @@ namespace Common.PlayMaker.Actions.Inputs
             }
             else
             {
-                if (!Input.GetMouseButton(0))
-                {
-                    moveX.Value = 0f;
-                    moveY.Value = 0f;
-                }
-                if (mouseDown && !Input.GetMouseButton(0)) return;
                 GetMouseInput();
             }
         }
 
         void GetTouchInput()
         {
+            moveX.Value = 0f;
+            moveY.Value = 0f;
+            inputUp.Value = false;
+            holdDown.Value = false;
 #if NEW_INPUT_SYSTEM_ONLY
             var touchCount = Touchscreen.current != null ? Touchscreen.current.touches.Count : 0;
             if (touchCount > 0)
             {
+                curInputDown = true;
+                holdDown.Value = true;
                 var touch = Touchscreen.current.touches[0];
                 if (touch.phase == TouchPhase.Moved)
                 {
@@ -81,15 +92,13 @@ namespace Common.PlayMaker.Actions.Inputs
                     moveX.Value = deltaPosition.x;
                     moveY.Value = deltaPosition.y;
                 }
-            }
-            else
-            {
-                moveX.Value = 0f;
-                moveY.Value = 0f;
+                return;
             }
 #else
             if (Input.touchCount > 0)
             {
+                curInputDown = true;
+                holdDown.Value = true;
                 Touch touch = Input.GetTouch(0);
                 if (touch.phase == TouchPhase.Moved)
                 {
@@ -97,28 +106,51 @@ namespace Common.PlayMaker.Actions.Inputs
                     moveX.Value = deltaPosition.x;
                     moveY.Value = deltaPosition.y;
                 }
-            }
-            else
-            {
-                
-                moveX.Value = 0f;
-                moveY.Value = 0f;
+                return;
             }
 #endif
+            // input up
+            if (curInputDown)
+            {
+                inputUp.Value = true;
+                curInputDown = false;
+            }
         }
 
         void GetMouseInput()
         {
+            moveX.Value = 0f;
+            moveY.Value = 0f;
+            inputUp.Value = false;
+            holdDown.Value = false;
 #if NEW_INPUT_SYSTEM_ONLY
-            if (Mouse.current == null) return;
-			// fudge factor accounts for sensitivity of old input system
-            var deltaRo = Mouse.current.delta.ReadValue();
-            moveX.Value = deltaRo.x * 0.05f;
-            moveY.Value = deltaRo.y * 0.05f;
+            if (Mouse.current != null) 
+            {
+                curInputDown = true;
+                holdDown.Value = true;
+                // fudge factor accounts for sensitivity of old input system
+                var deltaRo = Mouse.current.delta.ReadValue();
+                moveX.Value = deltaRo.x * 0.05f;
+                moveY.Value = deltaRo.y * 0.05f;
+                return;
+            }
+			
 #else
-            moveX.Value = Input.GetAxis("Mouse X");
-            moveY.Value = Input.GetAxis("Mouse Y");
+            if (!mouseDown || Input.GetMouseButton(0))
+            {
+                curInputDown = true;
+                holdDown.Value = true;
+                moveX.Value = Input.GetAxis("Mouse X");
+                moveY.Value = Input.GetAxis("Mouse Y");
+                return;
+            }
 #endif
+            // input up
+            if (curInputDown)
+            {
+                inputUp.Value = true;
+                curInputDown = false;
+            }
         }
     }
 }

@@ -79,6 +79,7 @@ namespace Common.PlayMaker.Actions.Inputs
         void DoTransform()
         {
             UsingTouchToRotation();
+            // UsingJoystickToRotation();
         }
 
         bool TransformVertical(float mvY)
@@ -114,8 +115,35 @@ namespace Common.PlayMaker.Actions.Inputs
         
         void UsingJoystickToRotation()
         {
-            tranMoveX.Value = moveX.Value;
-            tranMoveY.Value = moveY.Value;
+            var mvX = moveX.Value;
+            var mvY = moveY.Value;
+            var tchX = touchX.Value;
+            var tchY = touchY.Value;
+            tranMoveX.Value = 0f;
+            
+            var isMvFwd = TransformVertical(mvY);
+
+            TransformSidesway(isMvFwd);
+            
+            // 查看touch的值，如果touchX的abs值>一定值、touchY的abs值在一定范围内，触发与touch的值相反的左右平移
+            if (canSidesway)
+            {
+                tranMoveX.Value = tchX switch
+                {
+                    > 0.01f => -1f,
+                    < -0.01f => 1f,
+                    _ => tranMoveX.Value
+                };
+            }
+            
+            // 覆盖touchX，使用moveX作为旋转的值
+            // tranTouchX.Value = mvX switch
+            // {
+            //     > 0.2f => mvX,
+            //     < -0.2f => mvX,
+            //     _ => tranMoveX.Value
+            // };
+            tranTouchX.Value = mvX;
         }
         
         void UsingTouchToRotation()

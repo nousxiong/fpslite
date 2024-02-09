@@ -1,4 +1,5 @@
-﻿using HutongGames.PlayMaker;
+﻿using System.Diagnostics.CodeAnalysis;
+using HutongGames.PlayMaker;
 // ReSharper disable UnusedType.Global
 
 // ReSharper disable UnassignedField.Global
@@ -6,6 +7,8 @@
 
 namespace Common.PlayMaker.Actions.Inputs
 {
+    [SuppressMessage("ReSharper", "UnusedVariable")]
+    [SuppressMessage("ReSharper", "UnusedMember.Local")]
     public class TransformInput : FsmStateAction
     {
         [UIHint(UIHint.Variable)]
@@ -34,11 +37,19 @@ namespace Common.PlayMaker.Actions.Inputs
         
         [UIHint(UIHint.Variable)]
         [Tooltip("Store the input movement of X")]
-        public FsmFloat storeMoveX;
+        public FsmFloat tranMoveX;
         
         [UIHint(UIHint.Variable)]
         [Tooltip("Store the input movement of Y")]
-        public FsmFloat storeMoveY;
+        public FsmFloat tranMoveY;
+        
+        [UIHint(UIHint.Variable)]
+        [Tooltip("Store the input touch of X")]
+        public FsmFloat tranTouchX;
+        
+        [UIHint(UIHint.Variable)]
+        [Tooltip("Store the input touch of Y")]
+        public FsmFloat tranTouchY;
         
         [Tooltip("Repeat every frame.")]
         public bool everyFrame;
@@ -64,36 +75,30 @@ namespace Common.PlayMaker.Actions.Inputs
         {
             DoTransform();
         }
-        
+
         void DoTransform()
         {
-            var mvX = moveX.Value;
-            var mvY = moveY.Value;
-            var tchX = touchX.Value;
-            var tchY = touchY.Value;
-            // X值在范围内，触发左右平移
-            // if (mvX >= 0f)
-            // {
-            //     storeMoveX.Value = mvX is > 0.1f and < 0.7f ? 1f : 0f;
-            // }
-            // else
-            // {
-            //     storeMoveX.Value = mvX is > -0.7f and < -0.1f ? -1f : -0f;
-            // }
-            storeMoveX.Value = 0f;
-            
+            UsingTouchToRotation();
+        }
+
+        bool TransformVertical(float mvY)
+        {
             // Y大于一定值才会触发前后移动
             var isMvFwd = false;
             if (mvY >= 0f)
             {
-                storeMoveY.Value = mvY > 0.4f ? 1f : 0f;
-                isMvFwd = storeMoveY.Value != 0f;
+                tranMoveY.Value = mvY > 0.4f ? 1f : 0f;
+                isMvFwd = tranMoveY.Value != 0f;
             }
             else
             {
-                storeMoveY.Value = mvY < -0.4f ? -1f : 0f;
+                tranMoveY.Value = mvY < -0.4f ? -1f : 0f;
             }
+            return isMvFwd;
+        }
 
+        void TransformSidesway(bool isMvFwd)
+        {
             // 只要曾有过前移，就可以平移
             if (isMvFwd)
             {
@@ -105,20 +110,36 @@ namespace Common.PlayMaker.Actions.Inputs
             {
                 canSidesway = false;
             }
+        }
+        
+        void UsingJoystickToRotation()
+        {
+            tranMoveX.Value = moveX.Value;
+            tranMoveY.Value = moveY.Value;
+        }
+        
+        void UsingTouchToRotation()
+        {
+            var mvX = moveX.Value;
+            var mvY = moveY.Value;
+            var tchX = touchX.Value;
+            var tchY = touchY.Value;
+            tranMoveX.Value = 0f;
+            
+            var isMvFwd = TransformVertical(mvY);
+
+            TransformSidesway(isMvFwd);
             
             // 查看touch的值，如果touchX的abs值>一定值、touchY的abs值在一定范围内，触发与touch的值相反的左右平移
             if (canSidesway)
             {
-                if (tchX > 0.01f)
+                tranMoveX.Value = tchX switch
                 {
-                    storeMoveX.Value = -1f;
-                }
-                else if (tchX < -0.01f)
-                {
-                    storeMoveX.Value = 1f;
-                }
+                    > 0.01f => -1f,
+                    < -0.01f => 1f,
+                    _ => tranMoveX.Value
+                };
             }
-            
         }
     }
 }

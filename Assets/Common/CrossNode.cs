@@ -4,9 +4,8 @@ namespace Common
 {
     public class CrossNode : MonoBehaviour
     {
-#if UNITY_EDITOR
         public Color gizmoColor = Color.magenta;
-#endif
+
         void OnDrawGizmos()
         {
             if (!gameObject.activeInHierarchy)

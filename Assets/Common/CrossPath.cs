@@ -4,7 +4,6 @@ namespace Common
 {
     public class CrossPath : MonoBehaviour
     {
-#if UNITY_EDITOR
         public Vector3 size;
         public Color gizmoColor = Color.magenta;
         public Color parentColor = Color.grey;
@@ -14,7 +13,7 @@ namespace Common
         Vector3 pathArrowEdge = Vector3.zero; 
         Vector3 pathArrowLeft = Vector3.zero; 
         Vector3 pathArrowRight = Vector3.zero;
-#endif
+        
         BoxCollider pathCollider;
 
         void DrawBox()

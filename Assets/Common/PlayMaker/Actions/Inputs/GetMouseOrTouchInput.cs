@@ -103,8 +103,8 @@ namespace Common.PlayMaker.Actions.Inputs
                 if (touch.phase == TouchPhase.Moved)
                 {
                     Vector2 deltaPosition = touch.deltaPosition;
-                    moveX.Value = deltaPosition.x;
-                    moveY.Value = deltaPosition.y;
+                    moveX.Value = deltaPosition.x / 10f;
+                    moveY.Value = deltaPosition.y / 10f;
                 }
                 return;
             }

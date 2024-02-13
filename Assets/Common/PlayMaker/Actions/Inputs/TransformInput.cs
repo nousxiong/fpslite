@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using HutongGames.PlayMaker;
+// ReSharper disable FieldCanBeMadeReadOnly.Global
 
 // ReSharper disable UnusedMember.Global
 
@@ -53,6 +54,11 @@ namespace Common.PlayMaker.Actions.Inputs
         [UIHint(UIHint.Variable)]
         [Tooltip("Store the input touch of Y")]
         public FsmFloat tranTouchY;
+
+        public FsmFloat fwdSpeed = 1f;
+        public FsmFloat bwdSpeed = 0.5f;
+        [Tooltip("Sideways speed")]
+        public FsmFloat swSpeed = 1f;
         
         [Tooltip("Repeat every frame.")]
         public bool everyFrame;
@@ -85,24 +91,28 @@ namespace Common.PlayMaker.Actions.Inputs
 
         void DoTransform()
         {
+            // var mvX = moveX.Value;
             UsingTouchToRotation();
-            // UsingJoystickToRotation();
+            // 覆盖touchX，使用moveX作为旋转的值
+            // tranTouchX.Value = mvX;
         }
 
-        void TransformVertical(float mvY, out bool isMvFwd, out bool isMvBwd)
+        void TransformVertical(float mvY, out bool isMvFwd, out bool isMvBwd, out bool isBwd)
         {
             // Y大于一定值才会触发前后移动
             isMvFwd = false;
             isMvBwd = false;
+            isBwd = false;
             if (mvY >= 0f)
             {
                 // 如果当前hadFwd，则也触发前移
-                tranMoveY.Value = mvY > 0.5f || hadFwd ? 1f : 0f;
+                tranMoveY.Value = mvY > 0.5f || hadFwd ? fwdSpeed.Value : 0f;
                 isMvFwd = tranMoveY.Value != 0f;
             }
             else
             {
-                tranMoveY.Value = mvY < -0.5f ? -1f : 0f;
+                isBwd = mvY is < 0f and > -0.5f;
+                tranMoveY.Value = mvY < -0.5f ? -bwdSpeed.Value : 0f;
                 isMvBwd = tranMoveY.Value != 0f;
             }
         }
@@ -121,51 +131,20 @@ namespace Common.PlayMaker.Actions.Inputs
             }
         }
 
-        void TransformSidesway(bool isMvFwd, bool isMvBwd)
+        // ReSharper disable once UnusedParameter.Local
+        void TransformSidesway(bool isMvFwd, bool isMvBwd, bool isBwd)
         {
-            // 只要曾有过移动，就可以平移
-            if (isMvFwd || isMvBwd)
+            // 只要曾有过前移动，就可以平移
+            if (isMvFwd)
             {
                 canSidesway = true;
             }
 
-            // 抬起输入或者不移动时重置平移
-            if (inputUp.Value)
+            // 抬起输入或者向后时重置平移
+            if (inputUp.Value || isMvBwd)
             {
                 canSidesway = false;
             }
-        }
-        
-        void UsingJoystickToRotation()
-        {
-            var mvX = moveX.Value;
-            var mvY = moveY.Value;
-            var tchX = touchX.Value;
-            var tchY = touchY.Value;
-            tranMoveX.Value = 0f;
-            
-            TransformVertical(mvY, out var isMvFwd, out var isMvBwd);
-            TransformSidesway(isMvFwd, isMvBwd);
-            
-            // 查看touch的值，如果touchX的abs值>一定值、touchY的abs值在一定范围内，触发与touch的值相反的左右平移
-            if (canSidesway)
-            {
-                tranMoveX.Value = tchX switch
-                {
-                    > 0.01f => -1f,
-                    < -0.01f => 1f,
-                    _ => tranMoveX.Value
-                };
-            }
-            
-            // 覆盖touchX，使用moveX作为旋转的值
-            // tranTouchX.Value = mvX switch
-            // {
-            //     > 0.2f => mvX,
-            //     < -0.2f => mvX,
-            //     _ => tranMoveX.Value
-            // };
-            tranTouchX.Value = mvX;
         }
         
         void UsingTouchToRotation()
@@ -176,17 +155,17 @@ namespace Common.PlayMaker.Actions.Inputs
             var tchY = touchY.Value;
             tranMoveX.Value = 0f;
             
-            TransformVertical(mvY, out var isMvFwd, out var isMvBwd);
+            TransformVertical(mvY, out var isMvFwd, out var isMvBwd, out var isBwd);
             TransformForward(isMvFwd, isMvBwd);
-            TransformSidesway(isMvFwd, isMvBwd);
+            TransformSidesway(isMvFwd, isMvBwd, isBwd);
             
             // 查看touch的值，如果touchX的abs值>一定值、touchY的abs值在一定范围内，触发与touch的值相反的左右平移
             if (canSidesway)
             {
                 tranMoveX.Value = tchX switch
                 {
-                    > 0.01f => -1f,
-                    < -0.01f => 1f,
+                    > 0.01f => -swSpeed.Value,
+                    < -0.01f => swSpeed.Value,
                     _ => tranMoveX.Value
                 };
             }

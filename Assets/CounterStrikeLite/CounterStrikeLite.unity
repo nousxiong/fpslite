@@ -651,7 +651,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -200, y: -40}
+  m_AnchoredPosition: {x: -240, y: -60}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1036682595
@@ -2431,6 +2431,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2051954560754552828, guid: b31d9366a2f7a1e458d30bafd718f57b, type: 3}
+      propertyPath: fsm.states.Array.data[1].actionData.fsmOwnerDefaultParams.Array.data[0].gameObject.value
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2106288907813140621, guid: b31d9366a2f7a1e458d30bafd718f57b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.03
@@ -2488,17 +2492,29 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1036682593}
     - target: {fileID: 5080714401655017307, guid: b31d9366a2f7a1e458d30bafd718f57b, type: 3}
+      propertyPath: fsm.states.Array.data[3].actionData.fsmFloatParams.Array.data[0].value
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5080714401655017307, guid: b31d9366a2f7a1e458d30bafd718f57b, type: 3}
       propertyPath: fsm.states.Array.data[3].actionData.fsmFloatParams.Array.data[12].value
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5080714401655017307, guid: b31d9366a2f7a1e458d30bafd718f57b, type: 3}
       propertyPath: fsm.states.Array.data[3].actionData.fsmFloatParams.Array.data[15].value
-      value: 9
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5080714401655017307, guid: b31d9366a2f7a1e458d30bafd718f57b, type: 3}
       propertyPath: fsm.states.Array.data[3].actionData.fsmFloatParams.Array.data[19].value
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5080714401655017307, guid: b31d9366a2f7a1e458d30bafd718f57b, type: 3}
+      propertyPath: fsm.states.Array.data[3].actionData.fsmFloatParams.Array.data[23].value
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 5080714401655017307, guid: b31d9366a2f7a1e458d30bafd718f57b, type: 3}
+      propertyPath: fsm.states.Array.data[3].actionData.fsmOwnerDefaultParams.Array.data[0].gameObject.value
+      value: 
+      objectReference: {fileID: 1036682593}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

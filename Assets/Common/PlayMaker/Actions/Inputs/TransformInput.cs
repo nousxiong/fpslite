@@ -1,5 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using HutongGames.PlayMaker;
+
+// ReSharper disable UnusedMember.Global
+
 // ReSharper disable UnusedType.Global
 
 // ReSharper disable UnassignedField.Global
@@ -56,10 +59,14 @@ namespace Common.PlayMaker.Actions.Inputs
 
         // 是否可以平移
         bool canSidesway;
+        // 是否曾有过前移
+        bool hadFwd;
 
         public override void Reset()
         {
             everyFrame = false;
+            canSidesway = false;
+            hadFwd = false;
         }
 
         public override void OnEnter()
@@ -82,31 +89,47 @@ namespace Common.PlayMaker.Actions.Inputs
             // UsingJoystickToRotation();
         }
 
-        bool TransformVertical(float mvY)
+        void TransformVertical(float mvY, out bool isMvFwd, out bool isMvBwd)
         {
             // Y大于一定值才会触发前后移动
-            var isMvFwd = false;
+            isMvFwd = false;
+            isMvBwd = false;
             if (mvY >= 0f)
             {
-                tranMoveY.Value = mvY > 0.4f ? 1f : 0f;
+                // 如果当前hadFwd，则也触发前移
+                tranMoveY.Value = mvY > 0.5f || hadFwd ? 1f : 0f;
                 isMvFwd = tranMoveY.Value != 0f;
             }
             else
             {
-                tranMoveY.Value = mvY < -0.4f ? -1f : 0f;
+                tranMoveY.Value = mvY < -0.5f ? -1f : 0f;
+                isMvBwd = tranMoveY.Value != 0f;
             }
-            return isMvFwd;
         }
 
-        void TransformSidesway(bool isMvFwd)
+        void TransformMoveForward(bool isMvFwd, bool isMvBwd)
         {
-            // 只要曾有过前移，就可以平移
             if (isMvFwd)
+            {
+                hadFwd = true;
+            }
+            
+            // 抬起输入或者后移时重置
+            if (inputUp.Value || isMvBwd)
+            {
+                hadFwd = false;
+            }
+        }
+
+        void TransformSidesway(bool isMvFwd, bool isMvBwd)
+        {
+            // 只要曾有过移动，就可以平移
+            if (isMvFwd || isMvBwd)
             {
                 canSidesway = true;
             }
 
-            // 抬起输入时重置平移
+            // 抬起输入或者不移动时重置平移
             if (inputUp.Value)
             {
                 canSidesway = false;
@@ -121,9 +144,8 @@ namespace Common.PlayMaker.Actions.Inputs
             var tchY = touchY.Value;
             tranMoveX.Value = 0f;
             
-            var isMvFwd = TransformVertical(mvY);
-
-            TransformSidesway(isMvFwd);
+            TransformVertical(mvY, out var isMvFwd, out var isMvBwd);
+            TransformSidesway(isMvFwd, isMvBwd);
             
             // 查看touch的值，如果touchX的abs值>一定值、touchY的abs值在一定范围内，触发与touch的值相反的左右平移
             if (canSidesway)
@@ -154,9 +176,9 @@ namespace Common.PlayMaker.Actions.Inputs
             var tchY = touchY.Value;
             tranMoveX.Value = 0f;
             
-            var isMvFwd = TransformVertical(mvY);
-
-            TransformSidesway(isMvFwd);
+            TransformVertical(mvY, out var isMvFwd, out var isMvBwd);
+            TransformMoveForward(isMvFwd, isMvBwd);
+            TransformSidesway(isMvFwd, isMvBwd);
             
             // 查看touch的值，如果touchX的abs值>一定值、touchY的abs值在一定范围内，触发与touch的值相反的左右平移
             if (canSidesway)

@@ -107,7 +107,7 @@ namespace Common.PlayMaker.Actions.Inputs
             }
         }
 
-        void TransformMoveForward(bool isMvFwd, bool isMvBwd)
+        void TransformForward(bool isMvFwd, bool isMvBwd)
         {
             if (isMvFwd)
             {
@@ -177,7 +177,7 @@ namespace Common.PlayMaker.Actions.Inputs
             tranMoveX.Value = 0f;
             
             TransformVertical(mvY, out var isMvFwd, out var isMvBwd);
-            TransformMoveForward(isMvFwd, isMvBwd);
+            TransformForward(isMvFwd, isMvBwd);
             TransformSidesway(isMvFwd, isMvBwd);
             
             // 查看touch的值，如果touchX的abs值>一定值、touchY的abs值在一定范围内，触发与touch的值相反的左右平移

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 609fb0de52e65bd469278f37e79c0f78
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/Player Controller/Scripts/Climbing.cs
+  uploadId: 503117

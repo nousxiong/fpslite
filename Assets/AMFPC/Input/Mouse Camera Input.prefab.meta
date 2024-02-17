@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e2d815201aad1a24db521384ea8ef429
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/Input/Mouse Camera Input.prefab
+  uploadId: 503117

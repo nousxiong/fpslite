@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b6a67cc8f6ab2414e8b728d3e8ba67ba
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/Player Controller/Camera HeadBob Animations/JumpHeadbob.anim
+  uploadId: 503117

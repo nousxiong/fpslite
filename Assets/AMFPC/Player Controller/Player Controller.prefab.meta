@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 38a94b0cba73aa741be9363f31470223
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/Player Controller/Player Controller.prefab
+  uploadId: 503117

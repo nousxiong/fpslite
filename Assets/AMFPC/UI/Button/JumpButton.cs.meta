@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 89a99f9d19d8c6146b6991cc939c0cc3
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/UI/Button/JumpButton.cs
+  uploadId: 503117

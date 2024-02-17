@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0145359afbf2813488ab87010f4ad296
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/First Person Items & Arms/First Person Items/AK47/Animations/AR.controller
+  uploadId: 503117

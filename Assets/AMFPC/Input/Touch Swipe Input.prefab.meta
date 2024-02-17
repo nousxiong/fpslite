@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ca0038e880f01da46bfe60472a5f1c30
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/Input/Touch Swipe Input.prefab
+  uploadId: 503117

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5614892b7863815409d56c7144976435
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/First Person Items & Arms/First Person Items/Sniper/Animations/Sniper.controller
+  uploadId: 503117

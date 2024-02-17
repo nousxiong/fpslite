@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e043bb288b530dd4cad8afc58480edb4
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/Input/Unity Editor Screen Swipe Input.prefab
+  uploadId: 503117

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 16f1319c5313cf844942e9fa43b43341
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/Player Controller/Scripts/Gravity.cs
+  uploadId: 503117

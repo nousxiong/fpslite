@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ab43d2c517cac6d42bbef544a7017b29
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/First Person Items & Arms/Headbob Animations/First Person
+    Item Headbob.controller
+  uploadId: 503117

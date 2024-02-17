@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d6c0cf39a6ac3624bbdac24459321747
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 112000000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/Demo Scene/DemoScene/LightingData.asset
+  uploadId: 503117

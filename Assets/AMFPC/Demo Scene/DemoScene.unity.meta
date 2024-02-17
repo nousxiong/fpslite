@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c6dace1a6459f7a45bcae70a24021a17
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/Demo Scene/DemoScene.unity
+  uploadId: 503117

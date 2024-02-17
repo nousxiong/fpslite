@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6a13d9790d4374e479c7840fae7647d9
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/First Person Items & Arms/First Person Items/Sniper/Scope/ScopeCrossHair.mat
+  uploadId: 503117

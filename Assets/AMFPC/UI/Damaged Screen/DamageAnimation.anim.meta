@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 269e7cfd17ae92c47adeb0c544f1fc79
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/UI/Damaged Screen/DamageAnimation.anim
+  uploadId: 503117

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: c1bdfa6b88ed34d46954e1b6902bbf10
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/UI/Scripts/UIManager.cs
+  uploadId: 503117

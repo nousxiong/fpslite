@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 3b75ddbaeb1ca684e8ec5df9898e3f7e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/UI/Health Bar/Billboard Health Bar/BillBoard.cs
+  uploadId: 503117

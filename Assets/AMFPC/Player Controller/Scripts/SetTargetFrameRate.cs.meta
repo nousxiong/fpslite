@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: fa7056b1c9b55bb46bb98bda1cab898d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/Player Controller/Scripts/SetTargetFrameRate.cs
+  uploadId: 503117

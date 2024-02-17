@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d6744f2b6c67d9a41a101972bb50f295
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/Interactables/Door/3D Model/Door.mat
+  uploadId: 503117

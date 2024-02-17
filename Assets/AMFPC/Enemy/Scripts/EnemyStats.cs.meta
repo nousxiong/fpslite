@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: e371c30706ad2c34bae613e897bc6516
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/Enemy/Scripts/EnemyStats.cs
+  uploadId: 503117

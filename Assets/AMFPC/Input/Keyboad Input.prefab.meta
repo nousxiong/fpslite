@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 5fafe38bf1e140e4b9e95abbd2b765ad
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/Input/Keyboad Input.prefab
+  uploadId: 503117

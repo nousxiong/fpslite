@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4797f5b4aec9cbd4492001f83684834a, type: 3}
+  m_Name: Knife
+  m_EditorClassIdentifier: 
+  itemName: Knife
+  itemIcon: {fileID: 21300000, guid: 36176af06c498bd4aab18707a4767ad5, type: 3}
+  prefab: {fileID: 2241494580926702572, guid: c972dce5f28806a45843912e68bfd9d4, type: 3}
+  type: 0
+  stackable: 0
+  isFirstPersonItem: 1
+  FPItemIndex: 4
+  description: 
+  equipementType: 0
+  weaponType: 1
+  holdAds: 0
+  sniper: 0
+  automaticFire: 0
+  aimAssistStrength: 33.2
+  weaponDamage: 25
+  maxMagazineSize: 0
+  timeBetweenShots: 0.42
+  reloadDuration: 0
+  ammunitionType: {fileID: 0}
+  hitImpact: {fileID: 0}
+  trail: {fileID: 0}
+  fireSFX: {fileID: 8300000, guid: 1ed3698e749e62f45bb637c29f5d1dfc, type: 3}
+  reloadSFX: {fileID: 0}
+  aimSFX: {fileID: 0}
+  cancelAimSFX: {fileID: 0}

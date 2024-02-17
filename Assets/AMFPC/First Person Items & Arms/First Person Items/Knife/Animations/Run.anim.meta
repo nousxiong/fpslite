@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5ecbc9e22aaedd846a707c977c80b2cc
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/First Person Items & Arms/First Person Items/Knife/Animations/Run.anim
+  uploadId: 503117

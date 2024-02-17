@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: a800634694ef42448aea7ed42d5be864
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/UI/Weapon Info UI/Weapon UI.prefab
+  uploadId: 503117

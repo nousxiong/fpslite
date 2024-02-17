@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 37f28a89dd52a0a4c9ee8f31b97f1be1
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 23800000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/Demo Scene/DemoScene/NavMesh.asset
+  uploadId: 503117

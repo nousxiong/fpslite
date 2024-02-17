@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 08c47230fe9af244ab5dbc7130f4bcf7
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/UI/Damaged Screen/Player Damaged UI.prefab
+  uploadId: 503117

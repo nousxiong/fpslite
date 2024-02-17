@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 5e5b5eee42e09004ca2c92ba167cc1b6
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/Demo Scene/Skybox/Skybox Gradient.shader
+  uploadId: 503117

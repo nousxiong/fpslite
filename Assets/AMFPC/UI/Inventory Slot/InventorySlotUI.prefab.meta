@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 0053c6dd023d50b4aab6ce186f61a6b4
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/UI/Inventory Slot/InventorySlotUI.prefab
+  uploadId: 503117

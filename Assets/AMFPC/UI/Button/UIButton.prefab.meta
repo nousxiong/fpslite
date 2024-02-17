@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 39ab47de276fc8148a5599485e68a535
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/UI/Button/UIButton.prefab
+  uploadId: 503117

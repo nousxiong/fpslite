@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - InputManager
+  - ItemManager
+  - UIManager
   layers:
   - Default
   - TransparentFX
@@ -11,13 +14,13 @@ TagManager:
   - 
   - Water
   - UI
-  - Cross Path
+  - 
+  - 
+  - PostProcessing
+  - Ground
+  - Climbable
+  - FPS Arms
   - Player
-  - 
-  - 
-  - 
-  - 
-  - 
   - 
   - 
   - 

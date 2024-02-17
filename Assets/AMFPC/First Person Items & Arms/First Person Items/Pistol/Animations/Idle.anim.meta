@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: de9bb5addf17b5a449d06bd2a589a692
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/First Person Items & Arms/First Person Items/Pistol/Animations/Idle.anim
+  uploadId: 503117

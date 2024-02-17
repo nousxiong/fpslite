@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ba4b79c2a0838264c92fec2e85376946
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/Player Controller/Player Audio/PlayerSFX.asset
+  uploadId: 503117

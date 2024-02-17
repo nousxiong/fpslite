@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 338f5781b6a4e894fa3c27e79d612e14
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 8400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/First Person Items & Arms/First Person Items/Sniper/Scope/Scope.renderTexture
+  uploadId: 503117

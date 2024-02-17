@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 797660a05ff16ac4b91b95b89e824750
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/Player Inventory/Player Inventory.asset
+  uploadId: 503117

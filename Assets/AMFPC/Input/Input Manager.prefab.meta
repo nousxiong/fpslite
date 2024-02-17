@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: c81d4290c21cb9c46993970ed37ad3b5
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/Input/Input Manager.prefab
+  uploadId: 503117

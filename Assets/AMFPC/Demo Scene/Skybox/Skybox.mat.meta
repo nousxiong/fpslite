@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 55fd3915a2db3574081f199ea54a2c37
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/Demo Scene/Skybox/Skybox.mat
+  uploadId: 503117

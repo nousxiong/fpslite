@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8be38f7b9314d1546a06ac6137837f08
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/Player Controller/Camera HeadBob Animations/Camera Headbob.controller
+  uploadId: 503117

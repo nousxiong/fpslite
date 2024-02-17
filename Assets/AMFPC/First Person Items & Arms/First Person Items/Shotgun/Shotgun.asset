@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4797f5b4aec9cbd4492001f83684834a, type: 3}
+  m_Name: Shotgun
+  m_EditorClassIdentifier: 
+  itemName: Shotgun
+  itemIcon: {fileID: 21300000, guid: d614e8dc125ff71499968f625c8cee17, type: 3}
+  prefab: {fileID: 3115572407025952008, guid: 49e6f1496b9965e468cd842f086feb48, type: 3}
+  type: 0
+  stackable: 0
+  isFirstPersonItem: 1
+  FPItemIndex: 2
+  description: 
+  equipementType: 0
+  weaponType: 0
+  holdAds: 1
+  sniper: 0
+  automaticFire: 0
+  aimAssistStrength: 31.8
+  weaponDamage: 60
+  maxMagazineSize: 25
+  timeBetweenShots: 0.45
+  reloadDuration: 1.3
+  ammunitionType: {fileID: 11400000, guid: 08f66b5f632f4a542a9c8a0b7ced0e1a, type: 2}
+  hitImpact: {fileID: 466812221478746300, guid: 992955e1b9f1f2241966637e595f0629,
+    type: 3}
+  trail: {fileID: 3598241055555810062, guid: 77d6396a1c9e02044af973583bc60196, type: 3}
+  fireSFX: {fileID: 8300000, guid: f6e638d81960d76468b8578104aa87c3, type: 3}
+  reloadSFX: {fileID: 8300000, guid: e19be5f09bbbe9f4ab8ccdff4a70110c, type: 3}
+  aimSFX: {fileID: 8300000, guid: 0c069a0c99200674f8469e3ad2126787, type: 3}
+  cancelAimSFX: {fileID: 8300000, guid: 0083b2f815953fe4d938317330001c4e, type: 3}

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 113ff7e783220514f927120fdd78b575
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/Interactables/Drawer/Open.anim
+  uploadId: 503117

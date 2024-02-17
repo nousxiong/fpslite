@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b33203acc3f64fe44a181f0991df6916
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/Interactables/Door/Open.anim
+  uploadId: 503117

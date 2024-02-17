@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: f0760b27589f38042a59768fe7d597b8
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/Scriptables Objects/Items/Basic Object/DefaultObject.cs
+  uploadId: 503117

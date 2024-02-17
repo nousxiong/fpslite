@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 03a29ebe58c3f824c8cbe06b74d74af9
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/Player Controller/Camera HeadBob Animations/WalkHeadBob.anim
+  uploadId: 503117

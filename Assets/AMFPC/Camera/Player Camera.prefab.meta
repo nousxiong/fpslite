@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 76fbf5a47d6487942ba93736918ca078
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 177175
+  packageName: Advanced Mobile First Person Controller
+  packageVersion: 2.0
+  assetPath: Assets/AMFPC/Camera/Player Camera.prefab
+  uploadId: 503117

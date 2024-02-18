@@ -15,7 +15,8 @@ public class CameraLook : MonoBehaviour
         _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         _playerController = _playerTransform.gameObject.GetComponent<PlayerController>();
         _cameraPositionReference = _playerTransform.GetComponent<SetCameraReferencePosition>().cameraReference;
-        inputManager = _playerController.inputManager;
+        // inputManager = _playerController.inputManager;
+        inputManager = GameObject.FindGameObjectWithTag("InputManager").GetComponent<InputManager>();
         _playerTransform.forward = transform.parent.transform.forward;
     }
     void Start() 

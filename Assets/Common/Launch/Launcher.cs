@@ -27,7 +27,7 @@ namespace Common.Launch
             SetResolution();
         }
 
-        void SetResolution()
+        static void SetResolution()
         {
             if (Screen.width < Screen.height)
             {
@@ -38,7 +38,7 @@ namespace Common.Launch
                 {
                     var targetHeight = Mathf.RoundToInt((float)targetWidth * Screen.height / Screen.width);
                     Screen.SetResolution(targetWidth, targetHeight, true);
-                    Debug.Log($"Set device resolution to {targetWidth}*{targetHeight}");
+                    // Debug.Log($"Set device resolution to {targetWidth}*{targetHeight}");
                 }
             }
             else
@@ -50,7 +50,7 @@ namespace Common.Launch
                 {
                     var targetWidth = Mathf.RoundToInt((float)targetHeight * Screen.width / Screen.height);
                     Screen.SetResolution(targetWidth, targetHeight, true);
-                    Debug.Log($"Set device resolution to {targetWidth}*{targetHeight}");
+                    // Debug.Log($"Set device resolution to {targetWidth}*{targetHeight}");
                 }
             }
         }

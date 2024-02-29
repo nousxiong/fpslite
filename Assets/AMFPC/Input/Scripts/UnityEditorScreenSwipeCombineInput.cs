@@ -1,47 +1,48 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
+// ReSharper disable once CheckNamespace
 namespace Fpslite.AMFPC.Inputs
 {
     public class UnityEditorScreenSwipeCombineInput : MonoBehaviour
     {
-        private InputManager _inputManager;
-        private Vector3 _lastPos, _deltaPos;
+        InputManager inputManager;
+        Vector3 lastPos, deltaPos;
         [Range(0, 2)] public float sensitivity;
-        private bool _mouseOverUI;
-        private void Awake()
+        bool mouseOverUI;
+        void Awake()
         {
-            _inputManager = transform.parent.GetComponent<InputManager>();
+            inputManager = transform.parent.GetComponent<InputManager>();
         }
         void Update()
         {
 #if (UNITY_EDITOR)
             if (Input.GetMouseButtonDown(0))
             {
-                if (EventSystem.current.IsPointerOverGameObject() == true)
+                if (EventSystem.current.IsPointerOverGameObject())
                 {
-                    _mouseOverUI = true;
+                    // mouseOverUI = true;
                 }
-                _lastPos = Input.mousePosition;
+                lastPos = Input.mousePosition;
             }
             if (Input.GetMouseButtonUp(0))
             {
-                _mouseOverUI = false;
+                mouseOverUI = false;
             }
 
-            if (!_mouseOverUI)
+            if (!mouseOverUI)
             {
                 if (Input.GetMouseButton(0))
                 {
-                    _deltaPos = _lastPos - Input.mousePosition;
-                    _inputManager.cameraInput.y = Mathf.Lerp(_inputManager.cameraInput.y, -_deltaPos.x * sensitivity,15*Time.deltaTime) ;
-                    _inputManager.cameraInput.x = Mathf.Lerp(_inputManager.cameraInput.x, -_deltaPos.y * sensitivity, 15 * Time.deltaTime);
+                    deltaPos = lastPos - Input.mousePosition;
+                    inputManager.cameraInput.y = Mathf.Lerp(inputManager.cameraInput.y, -deltaPos.x * sensitivity,15*Time.deltaTime) ;
+                    inputManager.cameraInput.x = Mathf.Lerp(inputManager.cameraInput.x, -deltaPos.y * sensitivity, 15 * Time.deltaTime);
                 }
                 else
                 {
-                    _inputManager.cameraInput = Vector2.zero;
+                    inputManager.cameraInput = Vector2.zero;
                 }
-                _lastPos = Input.mousePosition;
+                lastPos = Input.mousePosition;
             }
 #endif
 

@@ -36,7 +36,7 @@ namespace Fpslite.AMFPC.Inputs
                 {
                     deltaPos = lastPos - Input.mousePosition;
                     inputManager.cameraInput.y = Mathf.Lerp(inputManager.cameraInput.y, -deltaPos.x * sensitivity,15*Time.deltaTime) ;
-                    inputManager.cameraInput.x = Mathf.Lerp(inputManager.cameraInput.x, -deltaPos.y * sensitivity, 15 * Time.deltaTime);
+                    // inputManager.cameraInput.x = Mathf.Lerp(inputManager.cameraInput.x, -deltaPos.y * sensitivity, 15 * Time.deltaTime);
                 }
                 else
                 {

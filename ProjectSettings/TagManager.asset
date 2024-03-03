@@ -7,6 +7,10 @@ TagManager:
   - InputManager
   - ItemManager
   - UIManager
+  - DamagedScreen
+  - Joystick
+  - WeaponInfoUI
+  - ScreenSwipe
   layers:
   - Default
   - TransparentFX

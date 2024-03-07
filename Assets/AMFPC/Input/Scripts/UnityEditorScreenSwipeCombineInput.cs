@@ -9,6 +9,7 @@ namespace Fpslite.AMFPC.Inputs
     {
         public float Horizontal => input.y;
         public float Vertical => input.x;
+        public bool InputUp { get; private set; }
 
         Vector2 input = Vector2.zero;
         // InputManager inputManager;
@@ -22,8 +23,10 @@ namespace Fpslite.AMFPC.Inputs
         void Update()
         {
 #if (UNITY_EDITOR)
+            InputUp = false;
             if (Input.GetMouseButtonDown(0))
             {
+                InputUp = false;
                 if (EventSystem.current.IsPointerOverGameObject())
                 {
                     // mouseOverUI = true;
@@ -33,6 +36,7 @@ namespace Fpslite.AMFPC.Inputs
             if (Input.GetMouseButtonUp(0))
             {
                 mouseOverUI = false;
+                InputUp = true;
             }
 
             if (!mouseOverUI)

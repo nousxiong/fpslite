@@ -10,16 +10,22 @@ namespace Fpslite.AMFPC.Inputs
         public float Horizontal => input.y;
         public float Vertical => input.x;
         public bool InputUp { get; private set; }
+        public bool Enabled { get; private set; }
 
         Vector2 input = Vector2.zero;
         // InputManager inputManager;
         Vector3 lastPos, deltaPos;
         [Range(0, 2)] public float sensitivity;
         bool mouseOverUI;
-        // void Awake()
-        // {
-        //     // inputManager = transform.parent.GetComponent<InputManager>();
-        // }
+        
+        void Awake()
+        {
+            // inputManager = transform.parent.GetComponent<InputManager>();
+#if (UNITY_EDITOR)
+            Enabled = true;
+#endif
+        }
+        
         void Update()
         {
 #if (UNITY_EDITOR)

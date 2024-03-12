@@ -2,6 +2,7 @@
 // ReSharper disable CheckNamespace
 // ReSharper disable UnusedVariable
 // ReSharper disable UnusedParameter.Local
+// ReSharper disable UnusedMember.Local
 
 namespace Fpslite.AMFPC.Inputs
 {
@@ -13,8 +14,13 @@ namespace Fpslite.AMFPC.Inputs
         public float swSpeed = 1f;
         
         UnityEditorScreenSwipeCombineInput screenSwipe;
+        TouchSwipeCombineInput touchSwipe;
         JoystickCombine joystick;
         InputManager inputManager;
+        
+        float swipeHorizontal => screenSwipe.Enabled ? screenSwipe.Horizontal : touchSwipe.Horizontal;
+        float swipeVertical => screenSwipe.Enabled ? screenSwipe.Vertical : touchSwipe.Vertical;
+        bool swipeInputUp => screenSwipe.Enabled ? screenSwipe.InputUp : touchSwipe.InputUp;
 
         // 是否可以平移
         bool canSidesway;
@@ -26,6 +32,7 @@ namespace Fpslite.AMFPC.Inputs
         void Awake()
         {
             screenSwipe = GameObject.FindGameObjectWithTag("ScreenSwipe").GetComponent<UnityEditorScreenSwipeCombineInput>();
+            touchSwipe = GameObject.FindGameObjectWithTag("TouchSwipe").GetComponent<TouchSwipeCombineInput>();
             joystick = GameObject.FindGameObjectWithTag("Joystick").GetComponent<JoystickCombine>();
             inputManager = GameObject.FindGameObjectWithTag("InputManager").GetComponent<InputManager>();
         }
@@ -105,12 +112,12 @@ namespace Fpslite.AMFPC.Inputs
         
         void Update()
         {
-            inputUp = screenSwipe.InputUp;
+            inputUp = swipeInputUp;
             
             // 更新移动
             var mvX = joystick.Horizontal;
             var mvY = joystick.Vertical;
-            var camY = screenSwipe.Horizontal;
+            var camY = swipeHorizontal;
             Vector2 move = Vector2.zero;
             
             move.y = TransformVertical(mvY, out var isMvFwd, out var isMvBwd, out var isBwd);
@@ -120,7 +127,7 @@ namespace Fpslite.AMFPC.Inputs
             
             // 更新视角
             Vector2 cam = Vector2.zero;
-            cam.y = screenSwipe.Horizontal;
+            cam.y = swipeHorizontal;
             inputManager.cameraInput = cam;
         }
     }

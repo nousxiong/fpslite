@@ -11,6 +11,7 @@ TagManager:
   - Joystick
   - WeaponInfoUI
   - ScreenSwipe
+  - TouchSwipe
   layers:
   - Default
   - TransparentFX

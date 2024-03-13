@@ -74,6 +74,7 @@ namespace Fpslite.AMFPC.Inputs
                             // {
                             //     mytouch = nullTouch;
                             // }
+                            mytouch = nullTouch;
                             break;
                         }
                     case TouchPhase.Canceled:

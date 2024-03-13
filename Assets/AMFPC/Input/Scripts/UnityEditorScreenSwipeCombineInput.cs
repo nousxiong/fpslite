@@ -7,10 +7,12 @@ namespace Fpslite.AMFPC.Inputs
 {
     public class UnityEditorScreenSwipeCombineInput : MonoBehaviour
     {
+        public KeyCode hold;
         public float Horizontal => input.y;
         public float Vertical => input.x;
         public bool InputUp { get; private set; }
         public bool Enabled { get; private set; }
+        public bool Hold { get; private set; }
 
         Vector2 input = Vector2.zero;
         // InputManager inputManager;
@@ -30,6 +32,7 @@ namespace Fpslite.AMFPC.Inputs
         {
 #if (UNITY_EDITOR)
             InputUp = false;
+            Hold = Input.GetKey(hold);
             if (Input.GetMouseButtonDown(0))
             {
                 InputUp = false;

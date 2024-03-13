@@ -10,11 +10,13 @@ namespace Fpslite.AMFPC.Inputs
         public float Horizontal => input.y;
         public float Vertical => input.x;
         public bool InputUp { get; private set; }
+        public bool Hold { get; private set; }
         
         Vector2 input = Vector2.zero;
         Touch mytouch;
         Touch nullTouch;
         int cameraControlAreaTouchId;
+        int holdTouchId;
         
         // void Awake()
         // {
@@ -23,6 +25,7 @@ namespace Fpslite.AMFPC.Inputs
         void Start()
         {
             cameraControlAreaTouchId = -1;
+            holdTouchId = -1;
             Input.multiTouchEnabled = true;
             nullTouch = new Touch();
         }
@@ -48,6 +51,10 @@ namespace Fpslite.AMFPC.Inputs
                                 cameraControlAreaTouchId = touch.fingerId;
                                 mytouch = touch;
                             }
+                            else if (holdTouchId == -1)
+                            {
+                                holdTouchId = touch.fingerId;
+                            }
                             break;
                         }
                     case TouchPhase.Moved:
@@ -65,6 +72,10 @@ namespace Fpslite.AMFPC.Inputs
                             {
                                 cameraControlAreaTouchId = -1;
                                 mytouch = nullTouch;
+                            }
+                            else if (touch.fingerId == holdTouchId)
+                            {
+                                holdTouchId = -1;
                             }
                             break;
                         }
@@ -86,6 +97,7 @@ namespace Fpslite.AMFPC.Inputs
             }
             input.y = Mathf.Lerp(input.y, mytouch.deltaPosition.x, 25 * Time.deltaTime);
             input.x = Mathf.Lerp(input.x, mytouch.deltaPosition.y, 25 * Time.deltaTime);
+            Hold = holdTouchId != -1;
         }
 
     }

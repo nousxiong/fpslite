@@ -21,6 +21,7 @@ namespace Fpslite.AMFPC.Inputs
         float swipeHorizontal => screenSwipe.Enabled ? screenSwipe.Horizontal : touchSwipe.Horizontal;
         float swipeVertical => screenSwipe.Enabled ? screenSwipe.Vertical : touchSwipe.Vertical;
         bool swipeInputUp => screenSwipe.Enabled ? screenSwipe.InputUp : touchSwipe.InputUp;
+        bool swipeHold => screenSwipe.Enabled ? screenSwipe.Hold : touchSwipe.Hold;
 
         // 是否可以平移
         bool canSidesway;
@@ -98,7 +99,7 @@ namespace Fpslite.AMFPC.Inputs
             
             // 如果在左右旋转视角，触发与camY的值相反的左右平移
             var result = 0f;
-            if (canSidesway)
+            if (swipeHold && canSidesway)
             {
                 result = camY switch
                 {

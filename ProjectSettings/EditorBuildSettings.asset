@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/AMFPC/Demo Scene/DemoScene.unity
+    guid: c6dace1a6459f7a45bcae70a24021a17
+  - enabled: 0
     path: Assets/CounterStrikeLite/CounterStrikeLiteWithAMFPC.unity
     guid: e5a26b664818db9448cb3e3c30edc8e4
   m_configObjects: {}

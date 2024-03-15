@@ -1,8 +1,7 @@
-﻿using Assets.RobustFSM.Demo.Scripts.States;
-using Assets.SimpleFSM.Demo.Scripts.States.Idle;
+﻿using RobustFSM.Demo.Scripts.States.Idle;
 using UnityEngine;
 
-namespace Assets.SimpleFSM.Demo.Scripts.States.Patrol
+namespace RobustFSM.Demo.Scripts.States.Patrol
 {
     public class PatrolMainState : BCharacterMonoState
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.SimpleFSM.Demo.Scripts
+namespace RobustFSM.Demo.Scripts
 {
     [RequireComponent(typeof(CharacterFSM))]
     public  class Character : MonoBehaviour

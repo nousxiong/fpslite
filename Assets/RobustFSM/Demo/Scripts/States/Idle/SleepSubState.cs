@@ -1,8 +1,6 @@
-﻿using Assets.RobustFSM.Demo.Scripts.States;
-using RobustFSM.Base;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Assets.SimpleFSM.Demo.Scripts.States.Idle
+namespace RobustFSM.Demo.Scripts.States.Idle
 {
     public class SleepSubState : BCharacterMonoState
     {

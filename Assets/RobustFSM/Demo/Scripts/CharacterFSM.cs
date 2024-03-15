@@ -1,8 +1,8 @@
 ﻿using RobustFSM.Base;
-using Assets.SimpleFSM.Demo.Scripts.States.Idle;
-using Assets.SimpleFSM.Demo.Scripts.States.Patrol;
+using RobustFSM.Demo.Scripts.States.Idle;
+using RobustFSM.Demo.Scripts.States.Patrol;
 
-namespace Assets.SimpleFSM.Demo.Scripts
+namespace RobustFSM.Demo.Scripts
 {
     public class CharacterFSM : MonoFSM<Character>
     {

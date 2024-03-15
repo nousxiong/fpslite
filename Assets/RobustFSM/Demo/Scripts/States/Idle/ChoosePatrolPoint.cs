@@ -1,8 +1,7 @@
-﻿using Assets.RobustFSM.Demo.Scripts.States;
-using Assets.SimpleFSM.Demo.Scripts.States.Patrol;
+﻿using RobustFSM.Demo.Scripts.States.Patrol;
 using UnityEngine;
 
-namespace Assets.SimpleFSM.Demo.Scripts.States.Idle
+namespace RobustFSM.Demo.Scripts.States.Idle
 {
     public class ChoosePatrolPoint : BCharacterMonoState
     {
@@ -18,7 +17,7 @@ namespace Assets.SimpleFSM.Demo.Scripts.States.Idle
             _initMaterial = Owner.MeshRenderer.material;
 
             // invoke change material
-            InvokeRepeating("ChangeToRandomMaterial", 0.5f, 0.1f);
+            InvokeRepeating(nameof(ChangeToRandomMaterial), 0.5f, 0.1f);
         }
 
         public void Update()
@@ -48,7 +47,7 @@ namespace Assets.SimpleFSM.Demo.Scripts.States.Idle
 
             // reset material
             Owner.MeshRenderer.material = _initMaterial;
-            CancelInvoke("ChangeToRandomMaterial");
+            CancelInvoke(nameof(ChangeToRandomMaterial));
         }
 
         public void ChangeToRandomMaterial()

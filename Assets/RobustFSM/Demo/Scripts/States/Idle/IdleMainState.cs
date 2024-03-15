@@ -1,7 +1,6 @@
 ﻿using RobustFSM.Base;
-using UnityEngine;
 
-namespace Assets.SimpleFSM.Demo.Scripts.States.Idle
+namespace RobustFSM.Demo.Scripts.States.Idle
 {
     public class IdleMainState : MonoHState
     {

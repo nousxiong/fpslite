@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: eabf47c6776db7e41b1ba6b18746a452
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 229841
+  packageName: StateMachines
+  packageVersion: 1.0
+  assetPath: Assets/KevinCastejon/StateMachines/HierarchicalFiniteStateMachine/Demo/TicTacToeDemo/Scenes/TicTacToeDemo.unity
+  uploadId: 576528

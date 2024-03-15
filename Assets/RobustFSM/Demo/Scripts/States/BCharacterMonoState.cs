@@ -1,12 +1,6 @@
-﻿using Assets.SimpleFSM.Demo.Scripts;
-using RobustFSM.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RobustFSM.Base;
 
-namespace Assets.RobustFSM.Demo.Scripts.States
+namespace RobustFSM.Demo.Scripts.States
 {
     public class BCharacterMonoState : MonoState
     {

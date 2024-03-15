@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 6a1dc1f63d21c174ea244f543be0a549
+timeCreated: 1501223415
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 100564
+  packageName: uFSM
+  packageVersion: 1.0
+  assetPath: Assets/PPoory/uFSM/Demo/FSM Actor/Actor.cs
+  uploadId: 201563

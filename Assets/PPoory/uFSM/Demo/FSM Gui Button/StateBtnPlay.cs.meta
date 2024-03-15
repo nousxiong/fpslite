@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 8b19819d91e09ff4faa45442ec5a2b62
+timeCreated: 1502880032
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 100564
+  packageName: uFSM
+  packageVersion: 1.0
+  assetPath: Assets/PPoory/uFSM/Demo/FSM Gui Button/StateBtnPlay.cs
+  uploadId: 201563

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: be0c260ce242dbc4c9dceb6179bce519
+timeCreated: 1501220429
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 100564
+  packageName: uFSM
+  packageVersion: 1.0
+  assetPath: Assets/PPoory/uFSM/Demo/Materials/Target Cube.mat
+  uploadId: 201563

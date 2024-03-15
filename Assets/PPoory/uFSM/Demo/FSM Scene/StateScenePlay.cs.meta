@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 1a0950a9fba12974e9bfcedeefe6e5f7
+timeCreated: 1502882749
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 100564
+  packageName: uFSM
+  packageVersion: 1.0
+  assetPath: Assets/PPoory/uFSM/Demo/FSM Scene/StateScenePlay.cs
+  uploadId: 201563

@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 882a922ca1d5ff24e90dd266650be65d
+timeCreated: 1502880983
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 100564
+  packageName: uFSM
+  packageVersion: 1.0
+  assetPath: Assets/PPoory/uFSM/Demo/FSM Actor/StateIdle.cs
+  uploadId: 201563

@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 4b1abbf4fda27af4681449695380b403
+timeCreated: 1502940133
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 100564
+  packageName: uFSM
+  packageVersion: 1.0
+  assetPath: Assets/PPoory/uFSM/Demo/FSM Cube/StateCubeDance.cs
+  uploadId: 201563

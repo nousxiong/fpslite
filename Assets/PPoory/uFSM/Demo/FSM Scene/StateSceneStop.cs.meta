@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 5a78d6ff7250c444dbae1199013b39d1
+timeCreated: 1502882763
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 100564
+  packageName: uFSM
+  packageVersion: 1.0
+  assetPath: Assets/PPoory/uFSM/Demo/FSM Scene/StateSceneStop.cs
+  uploadId: 201563

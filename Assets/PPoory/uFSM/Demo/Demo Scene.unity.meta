@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ee9b0f7a358373b4da7ccfc4a189104b
+timeCreated: 1502869964
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 100564
+  packageName: uFSM
+  packageVersion: 1.0
+  assetPath: Assets/PPoory/uFSM/Demo/Demo Scene.unity
+  uploadId: 201563

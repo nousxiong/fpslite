@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: dfd80e7d225406442b642caec520dcdd
+timeCreated: 1504672438
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 23800000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 100564
+  packageName: uFSM
+  packageVersion: 1.0
+  assetPath: Assets/PPoory/uFSM/Demo/Demo Scene/NavMesh.asset
+  uploadId: 201563

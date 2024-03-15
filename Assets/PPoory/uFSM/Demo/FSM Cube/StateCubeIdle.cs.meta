@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: ed60e5063237baa41b0033276dcbf0e6
+timeCreated: 1502940120
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 100564
+  packageName: uFSM
+  packageVersion: 1.0
+  assetPath: Assets/PPoory/uFSM/Demo/FSM Cube/StateCubeIdle.cs
+  uploadId: 201563

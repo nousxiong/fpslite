@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: a952ffd88abccbd4fa871ec33d42ff13
+timeCreated: 1502881638
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 100564
+  packageName: uFSM
+  packageVersion: 1.0
+  assetPath: Assets/PPoory/uFSM/Demo/FSM Gui Button/GuiButtonPlayStop.cs
+  uploadId: 201563

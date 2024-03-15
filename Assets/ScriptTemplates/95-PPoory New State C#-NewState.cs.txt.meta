@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d4fa55fa83837dd4da23ffe774b9710a
+timeCreated: 1502877391
+licenseType: Store
+TextScriptImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 100564
+  packageName: uFSM
+  packageVersion: 1.0
+  assetPath: Assets/ScriptTemplates/95-PPoory New State C#-NewState.cs.txt
+  uploadId: 201563

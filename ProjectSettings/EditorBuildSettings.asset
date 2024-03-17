@@ -11,5 +11,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/CounterStrikeLite/CounterStrikeLiteWithAMFPC.unity
     guid: e5a26b664818db9448cb3e3c30edc8e4
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 8b95d6b17290f8048a4e4a619819de0f,
+      type: 2}
   m_UseUCBPForAssetBundles: 0

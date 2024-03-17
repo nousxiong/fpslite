@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class AimAssist : MonoBehaviour
 {
@@ -16,6 +17,18 @@ public class AimAssist : MonoBehaviour
         cameraLook = GetComponent<CameraLook>();
     }
 
+    void OnEnable()
+    {
+        _targetDetected = false;
+    }
+
+    void OnDisable()
+    {
+        _targetDetected = false;
+        _target = null;
+        cameraLook.additionalRot = Vector3.zero;
+    }
+
     void Update()
     {
         SetAimAssistValues();
@@ -27,7 +40,13 @@ public class AimAssist : MonoBehaviour
     }
     public void RaycastAimAssistSphere()
     {
-        if (!Physics.SphereCast(transform.position, radius, transform.forward, out RaycastHit Hit, 99))
+        if (!Physics.SphereCast(
+                transform.position, 
+                radius, 
+                transform.forward, 
+                out RaycastHit Hit, 
+                99,
+                LayerMask.GetMask("Enemy")))
         {
             _targetDetected = false;
             return;

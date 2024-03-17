@@ -7,9 +7,11 @@ public class UnityEditorScreenSwipeInput : MonoBehaviour
     private Vector3 _lastPos, _deltaPos;
     [Range(0, 2)] public float sensitivity;
     private bool _mouseOverUI;
+    AimAssist _aimAssist;
     private void Awake()
     {
         _inputManager = transform.parent.GetComponent<InputManager>();
+        _aimAssist = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<AimAssist>();
     }
     void Update()
     {
@@ -21,10 +23,12 @@ public class UnityEditorScreenSwipeInput : MonoBehaviour
                 _mouseOverUI = true;
             }
             _lastPos = Input.mousePosition;
+            _aimAssist.enabled = false;
         }
         if (Input.GetMouseButtonUp(0))
         {
             _mouseOverUI = false;
+            _aimAssist.enabled = true;
         }
 
         if (!_mouseOverUI)

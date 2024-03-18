@@ -10,6 +10,7 @@ namespace Fpslite.AMFPC.Inputs
         public float Horizontal => input.y;
         public float Vertical => input.x;
         public bool InputUp { get; private set; }
+        public bool InputDown => !InputUp;
         public bool Hold { get; private set; }
         
         Vector2 input = Vector2.zero;
@@ -45,11 +46,11 @@ namespace Fpslite.AMFPC.Inputs
                 {
                     case TouchPhase.Began:
                         {
-                            InputUp = false;
                             if (cameraControlAreaTouchId == -1 /*&& touch.position.x >= Screen.width / 2*/)
                             {
                                 cameraControlAreaTouchId = touch.fingerId;
                                 mytouch = touch;
+                                InputUp = false;
                             }
                             else if (holdTouchId == -1)
                             {
@@ -67,11 +68,11 @@ namespace Fpslite.AMFPC.Inputs
                         }
                     case TouchPhase.Ended:
                         {
-                            InputUp = true;
                             if (touch.fingerId == cameraControlAreaTouchId)
                             {
                                 cameraControlAreaTouchId = -1;
                                 mytouch = nullTouch;
+                                InputUp = true;
                             }
                             else if (touch.fingerId == holdTouchId)
                             {

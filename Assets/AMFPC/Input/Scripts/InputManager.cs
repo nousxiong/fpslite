@@ -23,6 +23,9 @@ public class InputManager : MonoBehaviour
     public UnityEvent onReloadInputDown, onReloadInputUp;
     [HideInInspector] public bool reload;
     [HideInInspector] public Vector2 moveInput, cameraInput;
+    
+    public UnityEvent onAimAssistEnabled, onAimAssistDisabled;
+    [HideInInspector] public bool aimAssist;
 
     public void ADSInputDown()
     { 
@@ -43,6 +46,16 @@ public class InputManager : MonoBehaviour
     { 
         onReloadInputUp.Invoke(); 
         reload = false; 
+    }
+    public void AimAssistEnabled()
+    {
+        onAimAssistEnabled.Invoke();
+        aimAssist = true;
+    }
+    public void AimAssistDisabled()
+    {
+        onAimAssistDisabled.Invoke();
+        aimAssist = false;
     }
     public void FireInputDown()
     { 

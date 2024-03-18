@@ -130,6 +130,16 @@ namespace Fpslite.AMFPC.Inputs
             Vector2 cam = Vector2.zero;
             cam.y = swipeHorizontal;
             inputManager.cameraInput = cam;
+            
+            // 瞄准辅助
+            if (inputUp)
+            {
+                inputManager.AimAssistEnabled();
+            }
+            else
+            {
+                inputManager.AimAssistDisabled();
+            }
         }
     }
 }

@@ -11,6 +11,7 @@ namespace Fpslite.AMFPC.Inputs
         public float Horizontal => input.y;
         public float Vertical => input.x;
         public bool InputUp { get; private set; }
+        public bool InputDown => !InputUp;
         public bool Enabled { get; private set; }
         public bool Hold { get; private set; }
 
@@ -22,7 +23,6 @@ namespace Fpslite.AMFPC.Inputs
         
         void Awake()
         {
-            // inputManager = transform.parent.GetComponent<InputManager>();
 #if (UNITY_EDITOR)
             Enabled = true;
 #endif
@@ -35,12 +35,12 @@ namespace Fpslite.AMFPC.Inputs
             Hold = Input.GetKey(hold);
             if (Input.GetMouseButtonDown(0))
             {
-                InputUp = false;
                 if (EventSystem.current.IsPointerOverGameObject())
                 {
                     // mouseOverUI = true;
                 }
                 lastPos = Input.mousePosition;
+                InputUp = false;
             }
             if (Input.GetMouseButtonUp(0))
             {
@@ -53,14 +53,11 @@ namespace Fpslite.AMFPC.Inputs
                 if (Input.GetMouseButton(0))
                 {
                     deltaPos = lastPos - Input.mousePosition;
-                    // inputManager.cameraInput.y = Mathf.Lerp(inputManager.cameraInput.y, -deltaPos.x * sensitivity,15*Time.deltaTime) ;
-                    // inputManager.cameraInput.x = Mathf.Lerp(inputManager.cameraInput.x, -deltaPos.y * sensitivity, 15 * Time.deltaTime);
                     input.y = Mathf.Lerp(input.y, -deltaPos.x * sensitivity,15 * Time.deltaTime);
                     input.x = Mathf.Lerp(input.x, -deltaPos.y * sensitivity, 15 * Time.deltaTime);
                 }
                 else
                 {
-                    // inputManager.cameraInput = Vector2.zero;
                     input = Vector2.zero;
                 }
                 lastPos = Input.mousePosition;

@@ -5832,6 +5832,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TouchSwipeCombineInput
       objectReference: {fileID: 0}
+    - target: {fileID: 6370820441205267400, guid: 2504b9e3d6ac0454ea2b7724a58b2231,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6475,6 +6480,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8328386124329325563}
     m_Modifications:
+    - target: {fileID: 1733073273806434528, guid: 35bc3cc10abc5524da137285479ed0ad,
+        type: 3}
+      propertyPath: sensitivity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5971838736325271666, guid: 35bc3cc10abc5524da137285479ed0ad,
         type: 3}
       propertyPath: m_LocalPosition.x

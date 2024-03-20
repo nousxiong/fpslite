@@ -19,10 +19,11 @@ namespace Fpslite.AMFPC.Inputs
         int cameraControlAreaTouchId;
         int holdTouchId;
         
-        // void Awake()
-        // {
-        //     _inputManager = transform.parent.GetComponent<InputManager>();
-        // }
+        void Awake()
+        {
+            // _inputManager = transform.parent.GetComponent<InputManager>();
+            InputUp = true;
+        }
         void Start()
         {
             cameraControlAreaTouchId = -1;
@@ -39,7 +40,7 @@ namespace Fpslite.AMFPC.Inputs
         
         void GetTouchInput()
         {
-            InputUp = false;
+            // InputUp = false;
             foreach (Touch touch in Input.touches)
             {
                 switch (touch.phase)

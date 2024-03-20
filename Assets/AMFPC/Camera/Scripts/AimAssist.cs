@@ -13,6 +13,7 @@ public class AimAssist : MonoBehaviour
     [Range(0,100)] public float strength;
     Vector2 targetRot;
     InputManager inputManager;
+    public bool off;
 
     void Awake()
     {
@@ -29,6 +30,7 @@ public class AimAssist : MonoBehaviour
     void Enable()
     {
         targetDetected = false;
+        off = false;
     }
 
     void Disable()
@@ -36,15 +38,24 @@ public class AimAssist : MonoBehaviour
         targetDetected = false;
         target = null;
         cameraLook.additionalRot = Vector3.zero;
+        off = true;
     }
 
     void Update()
     {
+        if (off)
+        {
+            return;
+        }
         SetAimAssistValues();
         SetTargetRotationValues();
     }
     void FixedUpdate()
     {
+        if (off)
+        {
+            return;
+        }
         RaycastAimAssistSphere();
     }
     

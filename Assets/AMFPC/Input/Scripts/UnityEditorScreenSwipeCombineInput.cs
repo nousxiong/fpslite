@@ -25,13 +25,14 @@ namespace Fpslite.AMFPC.Inputs
         {
 #if (UNITY_EDITOR)
             Enabled = true;
+            InputUp = true;
 #endif
         }
         
         void Update()
         {
 #if (UNITY_EDITOR)
-            InputUp = false;
+            // InputUp = false;
             Hold = Input.GetKey(hold);
             if (Input.GetMouseButtonDown(0))
             {

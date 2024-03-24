@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class InputManager : MonoBehaviour
 {
@@ -16,7 +17,10 @@ public class InputManager : MonoBehaviour
     public UnityEvent onFireInputDown, onFireInputUp; 
     [HideInInspector] public bool fire;
 
-    public UnityEvent onADSInputDown, onADSInputUp; 
+    [FormerlySerializedAs("onADSInputDown")]
+    public UnityEvent onAdsInputDown;
+    [FormerlySerializedAs("onADSInputUp")]
+    public UnityEvent onAdsInputUp;
     [HideInInspector] public bool aim;
     public UnityEvent toggleInventoryUI;
 
@@ -27,14 +31,14 @@ public class InputManager : MonoBehaviour
     public UnityEvent onAimAssistEnabled, onAimAssistDisabled;
     [HideInInspector] public bool aimAssist;
 
-    public void ADSInputDown()
+    public void AdsInputDown()
     { 
-        onADSInputDown.Invoke();
+        onAdsInputDown.Invoke();
         aim = true; 
     }
-    public void ADSInputUp()
+    public void AdsInputUp()
     { 
-        onADSInputUp.Invoke(); 
+        onAdsInputUp.Invoke(); 
         aim = false; 
     }
     public void ReloadInputDown()

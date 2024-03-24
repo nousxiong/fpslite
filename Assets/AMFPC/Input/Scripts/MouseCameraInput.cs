@@ -23,11 +23,11 @@ public class MouseCameraInput : MonoBehaviour
         // Aim Down Sight
         if (Input.GetKeyDown(ADS))
         {
-            _inputManager.ADSInputDown();
+            _inputManager.AdsInputDown();
         }
         if (Input.GetKeyUp(ADS))
         {
-            _inputManager.ADSInputUp();
+            _inputManager.AdsInputUp();
         }
         // Firing 
         if (Input.GetKeyDown(fire))

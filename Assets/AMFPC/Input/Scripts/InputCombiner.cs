@@ -13,29 +13,29 @@ namespace Fpslite.AMFPC.Inputs
         [Tooltip("Sideways speed")]
         public float swSpeed = 1f;
         
-        UnityEditorScreenSwipeCombineInput screenSwipe;
-        TouchSwipeCombineInput touchSwipe;
-        JoystickCombine joystick;
-        InputManager inputManager;
+        UnityEditorScreenSwipeCombineInput _screenSwipe;
+        TouchSwipeCombineInput _touchSwipe;
+        JoystickCombine _joystick;
+        InputManager _inputManager;
         
-        float swipeHorizontal => screenSwipe.Enabled ? screenSwipe.Horizontal : touchSwipe.Horizontal;
-        float swipeVertical => screenSwipe.Enabled ? screenSwipe.Vertical : touchSwipe.Vertical;
-        bool swipeInputUp => screenSwipe.Enabled ? screenSwipe.InputUp : touchSwipe.InputUp;
-        bool swipeHold => screenSwipe.Enabled ? screenSwipe.Hold : touchSwipe.Hold;
+        float SwipeHorizontal => _screenSwipe.Enabled ? _screenSwipe.Horizontal : _touchSwipe.Horizontal;
+        float SwipeVertical => _screenSwipe.Enabled ? _screenSwipe.Vertical : _touchSwipe.Vertical;
+        bool SwipeInputUp => _screenSwipe.Enabled ? _screenSwipe.InputUp : _touchSwipe.InputUp;
+        bool SwipeHold => _screenSwipe.Enabled ? _screenSwipe.Hold : _touchSwipe.Hold;
 
         // 是否可以平移
-        bool canSidesway;
+        bool _canSidesway;
         // 是否曾有过前移
-        bool hadFwd;
+        bool _hadFwd;
         // 当前是否抬起输入
-        bool inputUp;
+        bool _inputUp;
 
         void Awake()
         {
-            screenSwipe = GameObject.FindGameObjectWithTag("ScreenSwipe").GetComponent<UnityEditorScreenSwipeCombineInput>();
-            touchSwipe = GameObject.FindGameObjectWithTag("TouchSwipe").GetComponent<TouchSwipeCombineInput>();
-            joystick = GameObject.FindGameObjectWithTag("Joystick").GetComponent<JoystickCombine>();
-            inputManager = GameObject.FindGameObjectWithTag("InputManager").GetComponent<InputManager>();
+            _screenSwipe = GameObject.FindGameObjectWithTag("ScreenSwipe").GetComponent<UnityEditorScreenSwipeCombineInput>();
+            _touchSwipe = GameObject.FindGameObjectWithTag("TouchSwipe").GetComponent<TouchSwipeCombineInput>();
+            _joystick = GameObject.FindGameObjectWithTag("Joystick").GetComponent<JoystickCombine>();
+            _inputManager = GameObject.FindGameObjectWithTag("InputManager").GetComponent<InputManager>();
         }
 
         // void Reset()
@@ -55,7 +55,7 @@ namespace Fpslite.AMFPC.Inputs
             if (mvY >= 0f)
             {
                 // 如果当前hadFwd，则也触发前移
-                result = mvY > 0.5f || hadFwd ? fwdSpeed : 0f;
+                result = mvY > 0.5f || _hadFwd ? fwdSpeed : 0f;
                 isMvFwd = result != 0f;
             }
             else
@@ -73,13 +73,13 @@ namespace Fpslite.AMFPC.Inputs
         {
             if (isMvFwd)
             {
-                hadFwd = true;
+                _hadFwd = true;
             }
             
             // 抬起输入或者后移时重置
-            if (inputUp || isMvBwd)
+            if (_inputUp || isMvBwd)
             {
-                hadFwd = false;
+                _hadFwd = false;
             }
         }
         
@@ -88,18 +88,18 @@ namespace Fpslite.AMFPC.Inputs
             // 只要曾有过前移动，就可以平移
             if (isMvFwd)
             {
-                canSidesway = true;
+                _canSidesway = true;
             }
 
             // 抬起输入或者向后时重置平移
-            if (inputUp || isMvBwd)
+            if (_inputUp || isMvBwd)
             {
-                canSidesway = false;
+                _canSidesway = false;
             }
             
             // 如果在左右旋转视角，触发与camY的值相反的左右平移
             var result = 0f;
-            if (swipeHold && canSidesway)
+            if (SwipeHold && _canSidesway)
             {
                 result = camY switch
                 {
@@ -113,32 +113,32 @@ namespace Fpslite.AMFPC.Inputs
         
         void Update()
         {
-            inputUp = swipeInputUp;
+            _inputUp = SwipeInputUp;
             
             // 更新移动
-            var mvX = joystick.Horizontal;
-            var mvY = joystick.Vertical;
-            var camY = swipeHorizontal;
+            var mvX = _joystick.Horizontal;
+            var mvY = _joystick.Vertical;
+            var camY = SwipeHorizontal;
             Vector2 move = Vector2.zero;
             
             move.y = TransformVertical(mvY, out var isMvFwd, out var isMvBwd, out var isBwd);
             move.x = TransformSidesway(camY, mvX, isMvFwd, isMvBwd, isBwd);
             
-            inputManager.moveInput = move;
+            _inputManager.moveInput = move;
             
             // 更新视角
             Vector2 cam = Vector2.zero;
-            cam.y = swipeHorizontal;
-            inputManager.cameraInput = cam;
+            cam.y = SwipeHorizontal;
+            _inputManager.cameraInput = cam;
             
             // 瞄准辅助
-            if (inputUp)
+            if (_inputUp)
             {
-                inputManager.AimAssistEnabled();
+                _inputManager.AimAssistEnabled();
             }
             else
             {
-                inputManager.AimAssistDisabled();
+                _inputManager.AimAssistDisabled();
             }
         }
     }

@@ -11,7 +11,7 @@ public class ADSButton : MonoBehaviour
     }
     void Start()
     {
-        _button.OnButtonDown.AddListener(_inputManager.ADSInputDown);
-        _button.OnButtonUp.AddListener(_inputManager.ADSInputUp);
+        _button.OnButtonDown.AddListener(_inputManager.AdsInputDown);
+        _button.OnButtonUp.AddListener(_inputManager.AdsInputUp);
     }
 }

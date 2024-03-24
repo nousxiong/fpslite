@@ -171,7 +171,7 @@ public class Gun : MonoBehaviour
     {
         if (_weaponItem.holdAds)
         {
-            _itemManager.inputManager.onADSInputUp.AddListener(() => _firstPersonAim.SwitchAiming(false));
+            _itemManager.inputManager.onAdsInputUp.AddListener(() => _firstPersonAim.SwitchAiming(false));
         }
     }
     private void SpawnBulletTrails(int number)

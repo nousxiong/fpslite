@@ -40,7 +40,7 @@ namespace PPoory {
                 bool found = false;
                 foreach ( StateTransition stateTransition in fsm.stateTransitionList ) {
                     if ( stateTransition.state == this ) {
-                        found = false;
+                        found = true;
                     }
                 }
 

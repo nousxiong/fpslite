@@ -29,7 +29,7 @@ public class FirstPersonAim : MonoBehaviour
         _weaponItem = GetComponent<ItemSettings>().item as WeaponObject;
         if (!holdAim)
         {
-            _itemManager.inputManager.onADSInputDown.AddListener(() => SwitchAiming(!isAiming));
+            _itemManager.inputManager.onAdsInputDown.AddListener(() => SwitchAiming(!isAiming));
         }
     }
     void Update()

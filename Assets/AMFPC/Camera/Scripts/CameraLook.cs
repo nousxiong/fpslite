@@ -1,19 +1,21 @@
 ﻿using UnityEngine;
 public class CameraLook : MonoBehaviour
 {
-    private Transform _playerTransform;
-    private PlayerController _playerController;
+    public bool IsVerticalRotating => canRotateCamera && Mathf.Abs(inputManager.cameraInput.y) > 0.001f;
+    
+    Transform _playerTransform;
+    // PlayerController _playerController;
     [HideInInspector] public InputManager inputManager;
     [Range(0,100)] public float sensitivity;
     [HideInInspector] public float sensitivityMultiplier;
-    private float _xRotation;
+    float _xRotation;
     [HideInInspector] public Vector2 rot, additionalRot;
     [HideInInspector] public bool canRotateCamera;
-    private Transform _cameraPositionReference;
-    private void Awake()
+    Transform _cameraPositionReference;
+    void Awake()
     {
         _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        _playerController = _playerTransform.gameObject.GetComponent<PlayerController>();
+        // _playerController = _playerTransform.gameObject.GetComponent<PlayerController>();
         _cameraPositionReference = _playerTransform.GetComponent<SetCameraReferencePosition>().cameraReference;
         // inputManager = _playerController.inputManager;
         inputManager = GameObject.FindGameObjectWithTag("InputManager").GetComponent<InputManager>();
@@ -28,21 +30,24 @@ public class CameraLook : MonoBehaviour
     {
         SetRotationValues();
     }
-    private void LateUpdate()
+    void LateUpdate()
     {
         RotateCamera();
         SetPosition(_cameraPositionReference.position);
     }
-    private void SetRotationValues()
+    void SetRotationValues()
     {
-        if (!canRotateCamera) return;
-        Vector3 _input = inputManager.cameraInput;
-        rot.x -= _input.x * (sensitivity* sensitivityMultiplier) * Time.fixedDeltaTime   ;
+        if (!canRotateCamera)
+        {
+            return;
+        }
+        Vector3 input = inputManager.cameraInput;
+        rot.x -= input.x * (sensitivity* sensitivityMultiplier) * Time.fixedDeltaTime   ;
         rot.x = Mathf.Clamp(rot.x+ additionalRot.x, -90, 90);
-        rot.y = _input.y * (sensitivity * sensitivityMultiplier) + additionalRot.y;
+        rot.y = input.y * (sensitivity * sensitivityMultiplier) + additionalRot.y;
         _xRotation = transform.rotation.x + rot.x;
     }
-    private void RotateCamera()
+    void RotateCamera()
     {
         if( canRotateCamera)
         {
@@ -51,7 +56,7 @@ public class CameraLook : MonoBehaviour
             transform.parent.parent.Rotate(_playerTransform.up, rot.y * Time.fixedDeltaTime);
         }
     }
-    private void SetPosition(Vector3 position)
+    void SetPosition(Vector3 position)
     {
         transform.parent.parent.position = position;
     }

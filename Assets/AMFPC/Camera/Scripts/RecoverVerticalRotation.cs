@@ -7,6 +7,7 @@ namespace AMFPC.Camera.Scripts
     /// </summary>
     public class RecoverVerticalRotation : MonoBehaviour
     {
+        public float sensitivity = 10f;
         CameraLook _cameraLook;
         InputManager _inputManager;
         bool _off;
@@ -26,6 +27,7 @@ namespace AMFPC.Camera.Scripts
         void AimAssistEnable()
         {
             _off = true;
+            _cameraLook.additionalRot = Vector2.zero;
         }
         
         void AimAssistDisable()
@@ -42,21 +44,26 @@ namespace AMFPC.Camera.Scripts
 
             if (!_cameraLook.IsVerticalRotating)
             {
+                // 如果没有转动，不需要恢复
+                _cameraLook.additionalRot = Vector2.zero;
                 return;
             }
 
 
             if (Mathf.Abs(_cameraLook.transform.localRotation.x) < 0.01f)
             {
+                // 移动到0度，结束
+                _cameraLook.additionalRot = Vector2.zero;
                 return;
             }
 
-            var speed = 30f;
+            // 根据相机Y轴（左右）旋转输入，来确定恢复的速度
+            var rot = Mathf.Abs(_inputManager.cameraInput.y * sensitivity * Time.fixedDeltaTime);
             if (_cameraLook.transform.localRotation.x > 0f)
             {
-                speed = -speed;
+                rot = -rot;
             }
-            _cameraLook.additionalRot.x = speed * Time.fixedDeltaTime;
+            _cameraLook.additionalRot.x = rot;
         }
     }
 }
